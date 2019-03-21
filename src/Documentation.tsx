@@ -8,7 +8,7 @@ import { types } from "@open-rpc/meta-schema";
 interface IProps {
   schema: types.OpenRPC;
   uiSchema?: any;
-  reactJsonOptions?: object;
+  reactJsonOptions?: any;
 }
 
 export default class Documentation extends React.Component<IProps> {
