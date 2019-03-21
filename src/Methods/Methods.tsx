@@ -11,6 +11,7 @@ import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import ExamplePairings from "../ExamplePairings/ExamplePairings";
 import Errors from "../Errors/Errors";
 import { types } from "@open-rpc/meta-schema";
+import { IUISchema } from "../UISchema";
 
 const styles = (theme: Theme) => ({
   heading: {
@@ -31,8 +32,8 @@ const styles = (theme: Theme) => ({
 
 interface IProps extends WithStyles<typeof styles> {
   schema?: types.OpenRPC;
-  uiSchema?: any;
-  reactJsonOptions?: object;
+  uiSchema?: IUISchema;
+  reactJsonOptions?: any;
 }
 
 class Methods extends Component<IProps> {

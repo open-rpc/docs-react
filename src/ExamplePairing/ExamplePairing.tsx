@@ -10,7 +10,7 @@ import { ExamplePairingObject } from "@open-rpc/meta-schema/build/src/types";
 interface IProps {
   examplePosition?: number;
   method?: types.MethodObject;
-  reactJsonOptions?: object;
+  reactJsonOptions?: any;
 }
 
 export default class ExamplePairing extends Component<IProps, {}> {

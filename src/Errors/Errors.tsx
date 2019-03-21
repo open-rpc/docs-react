@@ -19,7 +19,7 @@ const styles = (theme: Theme) => ({
 
 interface IProps extends WithStyles<typeof styles> {
   errors?: types.ErrorObject[];
-  reactJsonOptions?: object;
+  reactJsonOptions?: any;
 }
 
 class Errors extends Component<IProps> {

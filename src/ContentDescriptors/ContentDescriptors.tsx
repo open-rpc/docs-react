@@ -3,10 +3,11 @@ import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import { Typography } from "@material-ui/core";
 import { types } from "@open-rpc/meta-schema";
 import { ContentDescriptorObject } from "@open-rpc/meta-schema/build/src/types";
+import { IUISchema } from "../UISchema";
 
 interface IProps {
   schema?: types.OpenRPC;
-  uiSchema?: any;
+  uiSchema?: IUISchema;
 }
 
 export default class ContentDescriptors extends Component<IProps> {

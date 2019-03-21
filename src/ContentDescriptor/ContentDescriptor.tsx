@@ -7,6 +7,7 @@ import JSONSchema from "../JSONSchema/JSONSchema";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ReactMarkdown from "react-markdown";
 import { types } from "@open-rpc/meta-schema";
+import { IUISchema } from "../UISchema";
 
 const styles = (theme: Theme) => ({
   heading: {
@@ -30,7 +31,7 @@ interface IProps extends WithStyles<typeof styles> {
   contentDescriptor?: types.ContentDescriptorObject;
   hideIcon?: boolean;
   hideRequired?: boolean;
-  uiSchema?: any;
+  uiSchema?: IUISchema;
 }
 
 class ContentDescriptor extends Component<IProps> {

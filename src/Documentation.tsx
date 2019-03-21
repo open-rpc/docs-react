@@ -4,11 +4,12 @@ import Servers from "./Servers/Servers";
 import Methods from "./Methods/Methods";
 import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
 import { types } from "@open-rpc/meta-schema";
+import { IUISchema } from "./UISchema";
 
 interface IProps {
   schema: types.OpenRPC;
-  uiSchema?: any;
-  reactJsonOptions?: object;
+  uiSchema?: IUISchema;
+  reactJsonOptions?: any;
 }
 
 export default class Documentation extends React.Component<IProps> {
