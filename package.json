@@ -1,6 +1,6 @@
 {
   "name": "@open-rpc/docs-react",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "main": "build/index.js",
   "private": true,
