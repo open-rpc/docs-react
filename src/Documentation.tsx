@@ -6,7 +6,7 @@ import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
 import { types } from "@open-rpc/meta-schema";
 
 interface IProps {
-  schema?: types.OpenRPC;
+  schema: types.OpenRPC;
   uiSchema?: any;
   reactJsonOptions?: object;
 }
