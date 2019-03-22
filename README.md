@@ -26,7 +26,7 @@ and then use it somewhere:
 ```
 
 ##### In a new project:
-Here's how it would be used in a new `npm init react-app --typescript <appname>`  project:
+Here's how it would be used in a new `npx create-react-app <appname> --typescript`  project:
 ```
 import React from "react";
 import ReactDOM from "react-dom";
