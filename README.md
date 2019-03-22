@@ -58,3 +58,6 @@ const schema: types.OpenRPC = {
 ReactDOM.render(<Documentation schema={schema} />, document.getElementById("root"));
 
 ```
+
+###### screenshot
+![image](https://user-images.githubusercontent.com/364566/54797953-920e2180-4c13-11e9-9ff8-723a836d0e2c.png)
