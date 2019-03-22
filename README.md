@@ -25,18 +25,36 @@ and then use it somewhere:
 <Documentation schema={schema} />
 ```
 
-##### In a new project:
-Here's how it would be used in a new `npx create-react-app <appname> --typescript`  project:
-```
-import React from "react";
-import ReactDOM from "react-dom";
-import Documentation from "@open-rpc/docs-react";
+##### Example in a new project:
 
-const schema = {
-  "info": {
+###### create a new typescript project with `create-react-app`
+
+```
+npx create-react-app <appname> --typescript
+```
+
+```
+cd <appname>
+npm install .
+npm install @open-rpc/docs-react @open-rpc/meta-schema --save
+```
+
+###### index.ts
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Documentation from "@open-rpc/docs-react";
+import { types } from '@open-rpc/meta-schema';
+
+const schema: types.OpenRPC = {
+  openrpc: "1.0.0-rc1",
+  info: {
+    "version": "0.0.0-development",
     "title": "My New API"
-  }
+  },
+  methods: []
 };
 
 ReactDOM.render(<Documentation schema={schema} />, document.getElementById("root"));
+
 ```
