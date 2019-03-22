@@ -11,6 +11,7 @@ import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import ExamplePairings from "../ExamplePairings/ExamplePairings";
 import Errors from "../Errors/Errors";
 import { types } from "@open-rpc/meta-schema";
+import Links from "../Links/Links";
 
 const styles = (theme: Theme) => ({
   heading: {
@@ -65,7 +66,7 @@ class Methods extends Component<IProps> {
             }
             {method.params &&
               <ExpansionPanelDetails key="params">
-                <Params params={method.params as types.ContentDescriptorObject[]} uiSchema={uiSchema}/>
+                <Params params={method.params as types.ContentDescriptorObject[]} uiSchema={uiSchema} />
               </ExpansionPanelDetails>
             }
             {method.result &&
@@ -75,22 +76,32 @@ class Methods extends Component<IProps> {
             }
             {method.result && (method.result as types.ContentDescriptorObject).schema &&
               <ExpansionPanelDetails key="result">
-              <ContentDescriptor
-                contentDescriptor={method.result as types.ContentDescriptorObject}
-                hideRequired={true} uiSchema={uiSchema} />
+                <ContentDescriptor
+                  contentDescriptor={method.result as types.ContentDescriptorObject}
+                  hideRequired={true} uiSchema={uiSchema} />
               </ExpansionPanelDetails>
             }
             {method.errors && method.errors.length > 0 &&
               <ExpansionPanelDetails key="result">
-                <Errors errors={method.errors as types.ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions}/>
+                <Errors errors={method.errors as types.ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
             {method.examples && method.examples.length > 0 &&
               <ExpansionPanelDetails key="examples">
-              <ExamplePairings
-                examples={method.examples as types.ExamplePairingObject[]}
-                method={method}
-                reactJsonOptions={this.props.reactJsonOptions} />
+                <ExamplePairings
+                  examples={method.examples as types.ExamplePairingObject[]}
+                  method={method}
+                  reactJsonOptions={this.props.reactJsonOptions} />
+              </ExpansionPanelDetails>
+            }
+            {method.links && method.links.length > 0 &&
+              <ExpansionPanelDetails key="result-title">
+                <Typography variant="h5">Links</Typography>
+              </ExpansionPanelDetails>
+            }
+            {method.links && method.links.length > 0 &&
+              <ExpansionPanelDetails key="links">
+                <Links links={method.links} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
           </ExpansionPanel>

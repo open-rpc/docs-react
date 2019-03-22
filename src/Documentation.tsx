@@ -23,7 +23,7 @@ export default class Documentation extends React.Component<IProps> {
     return (
       <>
           <Info schema={schema} />
-          <Servers schema={schema} />
+          <Servers servers={schema.servers} />
           <Methods schema={schema} uiSchema={uiSchema} reactJsonOptions={reactJsonOptions}/>
           <ContentDescriptors schema={schema} uiSchema={uiSchema}></ContentDescriptors>
       </>
