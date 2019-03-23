@@ -8,39 +8,37 @@ it("renders without crashing", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it("renders empty with no schema", () => {
+it("renders empty with no servers", () => {
   const div = document.createElement("div");
   ReactDOM.render(<Servers />, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it("renders empty with empty schema", () => {
+it("renders empty with empty servers", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Servers schema={{} as any}/>, div);
+  ReactDOM.render(<Servers servers={[]} />, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it("renders empty with empty schema servers", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Servers schema={{ servers: [] } as any}/>, div);
+  ReactDOM.render(<Servers servers={[]} />, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it("renders schema servers", () => {
   const div = document.createElement("div");
-  const schema = {
-    servers: [
-      {
-        description: "foobar",
-        name: "Pet Store",
-        url: "http://petstore.openrpc.io/api",
-      },
-    ],
-  };
-  ReactDOM.render(<Servers schema={schema as any}/>, div);
+  const servers = [
+    {
+      description: "foobar",
+      name: "Pet Store",
+      url: "http://petstore.openrpc.io/api",
+    },
+  ]
+  ReactDOM.render(<Servers servers={servers} />, div);
   expect(div.innerHTML.includes("Pet Store")).toBe(true);
   expect(div.innerHTML.includes('href="http://petstore.openrpc.io/api"')).toBe(true);
   expect(div.innerHTML.includes("foobar")).toBe(true);

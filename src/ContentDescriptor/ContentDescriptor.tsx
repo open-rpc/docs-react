@@ -14,11 +14,6 @@ const styles = (theme: Theme) => ({
     flexShrink: 0,
     fontSize: theme.typography.pxToRem(15),
   },
-  root: {
-    marginBottom: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 3,
-    width: "100%",
-  },
   secondaryHeading: {
     alignSelf: "end",
     color: theme.palette.text.secondary,
