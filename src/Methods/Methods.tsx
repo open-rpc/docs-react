@@ -60,7 +60,7 @@ class Methods extends Component<IProps> {
               </ExpansionPanelDetails>
             }
             {method.params && method.params.length > 0 &&
-              <ExpansionPanelDetails key="result-title">
+              <ExpansionPanelDetails key="params-title">
                 <Typography variant="h5">Params</Typography>
               </ExpansionPanelDetails>
             }
@@ -82,7 +82,7 @@ class Methods extends Component<IProps> {
               </ExpansionPanelDetails>
             }
             {method.errors && method.errors.length > 0 &&
-              <ExpansionPanelDetails key="result">
+              <ExpansionPanelDetails key="errors">
                 <Errors errors={method.errors as types.ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
@@ -95,7 +95,7 @@ class Methods extends Component<IProps> {
               </ExpansionPanelDetails>
             }
             {method.links && method.links.length > 0 &&
-              <ExpansionPanelDetails key="result-title">
+              <ExpansionPanelDetails key="links-title">
                 <Typography variant="h5">Links</Typography>
               </ExpansionPanelDetails>
             }
