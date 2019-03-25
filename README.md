@@ -1,6 +1,8 @@
 # docs-react
 OpenRPC documentation as a react component
 
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=open-rpc/docs-react)](https://dependabot.com)
+
 #### What is this?
 This is a react component that will render documentation for a given OpenRPC document.
 
