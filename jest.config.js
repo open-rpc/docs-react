@@ -6,6 +6,5 @@ module.exports = {
   "rootDir": "./src",
   "testEnvironment": "jsdom",
   "testPathIgnorePatterns": ["./build"],
-  "preset": "ts-jest",
-  "files": ["src/**/*.tsx"]
+  "preset": "ts-jest"
 }

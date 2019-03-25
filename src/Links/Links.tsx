@@ -47,7 +47,7 @@ class Links extends Component<IProps> {
         <TableRow>
           <TableCell colSpan={6}>
             {links.map((link, i) => (
-              <div style={{ width: "100%" }}>
+              <div style={{ width: "100%" }} key={i}>
                 <ExpansionPanel
                   style={{ width: "100%" }} defaultExpanded={uiSchema && uiSchema.links["ui:defaultExpanded"]} key={i}>
                   <ExpansionPanelSummary
@@ -63,7 +63,8 @@ class Links extends Component<IProps> {
                     {link.params && <ReactJson src={link.params} {...reactJsonOptions} />}
                     {link.server &&
                       <Typography variant="h6" gutterBottom className={classes.paramsMargin}>Server</Typography>}
-                    {link.server && <Servers servers={[link.server]} noTitle={true}/>}
+                    {link.server && <Servers
+                      servers={[link.server]} noTitle={true} reactJsonOptions={reactJsonOptions} />}
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </div>
