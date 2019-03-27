@@ -61,3 +61,7 @@ ReactDOM.render(<Documentation schema={schema} />, document.getElementById("root
 
 ###### screenshot
 ![image](https://user-images.githubusercontent.com/364566/54797953-920e2180-4c13-11e9-9ff8-723a836d0e2c.png)
+
+### Contributing
+
+How to contribute, build and release are outlined in [CONTRIBUTING.md](CONTRIBUTING.md), [BUILDING.md](BUILDING.md) and [RELEASING.md](RELEASING.md) respectively. Commits in this repository follow the [CONVENTIONAL_COMMITS.md](CONVENTIONAL_COMMITS.md) specification.
