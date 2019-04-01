@@ -124,3 +124,62 @@ it("renders schema methods result", () => {
   expect(div.innerHTML.includes("id")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it("renders schema methods tags", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        name: "foobar",
+        result: {
+          schema: {
+            properties: {
+              id: {
+                format: "int64",
+                type: "integer",
+              },
+              name: {
+                type: "string",
+              },
+              tag: {
+                type: "string",
+              },
+            },
+            required: [
+              "id",
+            ],
+          },
+        },
+        tags: ["tag3", "tag4"],
+      },
+      {
+        result: {
+          schema: {
+            properties: {
+              id: {
+                format: "int64",
+                type: "integer",
+              },
+              name: {
+                type: "string",
+              },
+              tag: {
+                type: "string",
+              },
+            },
+            required: [
+              "id",
+            ],
+          },
+        },
+        tags: ["salad", "mytag"],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  expect(div.innerHTML.includes("tag3")).toBe(true);
+  expect(div.innerHTML.includes("tag4")).toBe(true);
+  expect(div.innerHTML.includes("salad")).toBe(true);
+  expect(div.innerHTML.includes("mytag")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
