@@ -4,12 +4,12 @@ import { Chip } from "@material-ui/core";
 const hashColor = require("hash-color-material");
 
 interface IProps {
-  tags?: string[];
+  tags?: types.TagObject[];
 }
 
 export default class Tags extends Component<IProps> {
   public render() {
-    const { tags } = this.props;
+    const { tags }: { tags?: any} = this.props;
     if (!tags || tags.length === 0) {
       return null;
     }
@@ -19,9 +19,10 @@ export default class Tags extends Component<IProps> {
           tags.map((tag: any, k: number) => {
             return (
               <Chip
-                key={tag}
-                label={tag}
-                style={{ backgroundColor: hashColor.getColorFromString(tag, false) }} />
+                key={tag.name}
+                label={tag.name}
+                style={{ backgroundColor: hashColor.getColorFromString(tag.name, false) }}
+              />
             );
           })
         }

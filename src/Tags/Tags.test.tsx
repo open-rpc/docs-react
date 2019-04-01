@@ -11,7 +11,14 @@ it("renders empty with empty tags", () => {
 
 it("renders schema tags", () => {
   const div = document.createElement("div");
-  const tags = ["salad", "mytag"];
+  const tags = [
+    {
+      name: "salad",
+    },
+    {
+      name: "mytag",
+    }
+  ];
   ReactDOM.render(<Tags tags={tags} />, div);
   expect(div.innerHTML.includes("salad")).toBe(true);
   expect(div.innerHTML.includes("mytag")).toBe(true);

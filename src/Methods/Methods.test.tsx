@@ -150,7 +150,14 @@ it("renders schema methods tags", () => {
             ],
           },
         },
-        tags: ["tag3", "tag4"],
+        tags: [
+          {
+            name: "tag3",
+          },
+          {
+            name: "tag4",
+          }
+        ]
       },
       {
         result: {
@@ -172,7 +179,14 @@ it("renders schema methods tags", () => {
             ],
           },
         },
-        tags: ["salad", "mytag"],
+        tags: [
+          {
+            name: "salad",
+          },
+          {
+            name: "mytag",
+          },
+        ],
       },
     ],
   };
