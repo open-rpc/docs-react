@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles, Theme, WithStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import _ from "lodash";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -12,6 +13,8 @@ import ExamplePairings from "../ExamplePairings/ExamplePairings";
 import Errors from "../Errors/Errors";
 import { types } from "@open-rpc/meta-schema";
 import Links from "../Links/Links";
+import { Chip } from "@material-ui/core";
+import Tags from "../Tags/Tags";
 
 const styles = (theme: Theme) => ({
   heading: {
@@ -54,6 +57,12 @@ class Methods extends Component<IProps> {
               <Typography key={method.name} className={classes.heading}>{method.name}</Typography>
               <Typography key={method.summary} className={classes.secondaryHeading}>{method.summary}</Typography>
             </ExpansionPanelSummary>
+
+            {method.tags && method.tags.length > 0 &&
+              <ExpansionPanelDetails key="tags">
+                <Tags tags={method.tags as any} />
+              </ExpansionPanelDetails>
+            }
             {method.description &&
               <ExpansionPanelDetails key="description">
                 <ReactMarkdown source={method.description} />
