@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Links from "./Links";
-import { types } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

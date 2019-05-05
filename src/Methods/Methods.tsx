@@ -11,9 +11,14 @@ import Params from "../Params/Params";
 import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import ExamplePairings from "../ExamplePairings/ExamplePairings";
 import Errors from "../Errors/Errors";
-import { types } from "@open-rpc/meta-schema";
+import {
+  OpenRPC,
+  MethodObject,
+  ContentDescriptorObject,
+  ErrorObject,
+  ExamplePairingObject,
+} from "@open-rpc/meta-schema";
 import Links from "../Links/Links";
-import { Chip } from "@material-ui/core";
 import Tags from "../Tags/Tags";
 
 const styles = (theme: Theme) => ({
@@ -34,7 +39,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  schema?: types.OpenRPC;
+  schema?: OpenRPC;
   uiSchema?: any;
   reactJsonOptions?: object;
 }
@@ -45,7 +50,7 @@ class Methods extends Component<IProps> {
     if (!schema) {
       return null;
     }
-    const methods: types.MethodObject[] = schema.methods;
+    const methods: MethodObject[] = schema.methods;
     const methodsExist = methods && methods.length > 0;
     if (!schema || !schema.methods || !methodsExist) { return null; }
     return (
@@ -75,7 +80,7 @@ class Methods extends Component<IProps> {
             }
             {method.params &&
               <ExpansionPanelDetails key="params">
-                <Params params={method.params as types.ContentDescriptorObject[]} uiSchema={uiSchema} />
+                <Params params={method.params as ContentDescriptorObject[]} uiSchema={uiSchema} />
               </ExpansionPanelDetails>
             }
             {method.result &&
@@ -83,22 +88,22 @@ class Methods extends Component<IProps> {
                 <Typography variant="h5">Result</Typography>
               </ExpansionPanelDetails>
             }
-            {method.result && (method.result as types.ContentDescriptorObject).schema &&
+            {method.result && (method.result as ContentDescriptorObject).schema &&
               <ExpansionPanelDetails key="result">
                 <ContentDescriptor
-                  contentDescriptor={method.result as types.ContentDescriptorObject}
+                  contentDescriptor={method.result as ContentDescriptorObject}
                   hideRequired={true} uiSchema={uiSchema} />
               </ExpansionPanelDetails>
             }
             {method.errors && method.errors.length > 0 &&
               <ExpansionPanelDetails key="errors">
-                <Errors errors={method.errors as types.ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
+                <Errors errors={method.errors as ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
             {method.examples && method.examples.length > 0 &&
               <ExpansionPanelDetails key="examples">
                 <ExamplePairings
-                  examples={method.examples as types.ExamplePairingObject[]}
+                  examples={method.examples as ExamplePairingObject[]}
                   method={method}
                   reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>

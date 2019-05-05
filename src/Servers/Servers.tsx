@@ -5,7 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 import ReactMarkdown from "react-markdown";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Typography, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel } from "@material-ui/core";
-import { types } from "@open-rpc/meta-schema";
+import { ServerObject } from "@open-rpc/meta-schema";
 import ReactJson from "react-json-view";
 import ExpansionTable from "../ExpansionTable/ExpansionTable";
 
@@ -26,7 +26,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  servers?: types.ServerObject[];
+  servers?: ServerObject[];
   uiSchema?: any;
   reactJsonOptions?: any;
   noTitle?: boolean;

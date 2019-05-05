@@ -4,7 +4,7 @@ import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import { withStyles, Theme, WithStyles } from "@material-ui/core/styles";
 import ReactMarkdown from "react-markdown";
-import { types } from "@open-rpc/meta-schema";
+import { OpenRPC } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   button: {
@@ -19,7 +19,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  schema?: types.OpenRPC;
+  schema?: OpenRPC;
 }
 
 class Info extends Component<IProps> {

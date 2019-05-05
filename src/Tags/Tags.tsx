@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { types } from "@open-rpc/meta-schema";
+import { TagObject } from "@open-rpc/meta-schema";
 import { Chip } from "@material-ui/core";
 const hashColor = require("hash-color-material");
 
 interface IProps {
-  tags?: types.TagObject[];
+  tags?: TagObject[];
 }
 
 export default class Tags extends Component<IProps> {

@@ -10,7 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles, Theme, WithStyles } from "@material-ui/core/styles";
 import ReactMarkdown from "react-markdown";
-import { types } from "@open-rpc/meta-schema";
+import { LinkObject } from "@open-rpc/meta-schema";
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpansionTable from "../ExpansionTable/ExpansionTable";
 import Servers from "../Servers/Servers";
@@ -33,7 +33,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  links?: types.LinkObject[];
+  links?: LinkObject[];
   uiSchema?: any;
   reactJsonOptions?: any;
 }
