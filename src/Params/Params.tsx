@@ -6,7 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
-import { types } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   schema: {
@@ -24,7 +24,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  params?: types.ContentDescriptorObject[];
+  params?: ContentDescriptorObject[];
   uiSchema?: any;
 }
 

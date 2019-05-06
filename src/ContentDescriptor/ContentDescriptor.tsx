@@ -6,7 +6,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import JSONSchema from "../JSONSchema/JSONSchema";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ReactMarkdown from "react-markdown";
-import { types } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   heading: {
@@ -22,7 +22,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  contentDescriptor?: types.ContentDescriptorObject;
+  contentDescriptor?: ContentDescriptorObject;
   hideIcon?: boolean;
   hideRequired?: boolean;
   uiSchema?: any;

@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Typography, Grid } from "@material-ui/core";
 import ReactJson from "react-json-view";
-import { types } from "@open-rpc/meta-schema";
+import { ErrorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   code: {
@@ -18,7 +18,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface IProps extends WithStyles<typeof styles> {
-  errors?: types.ErrorObject[];
+  errors?: ErrorObject[];
   reactJsonOptions?: any;
 }
 

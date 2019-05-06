@@ -17,7 +17,7 @@ it("renders schema tags", () => {
     },
     {
       name: "mytag",
-    }
+    },
   ];
   ReactDOM.render(<Tags tags={tags} />, div);
   expect(div.innerHTML.includes("salad")).toBe(true);

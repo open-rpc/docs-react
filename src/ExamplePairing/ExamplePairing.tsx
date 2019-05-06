@@ -3,13 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import { Card, CardContent } from "@material-ui/core";
 import ReactJson from "react-json-view";
 import ReactMarkdown from "react-markdown";
-import { types } from "@open-rpc/meta-schema";
+import { MethodObject, ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
-import { ExamplePairingObject } from "@open-rpc/meta-schema/build/src/types";
 
 interface IProps {
   examplePosition?: number;
-  method?: types.MethodObject;
+  method?: MethodObject;
   reactJsonOptions?: any;
 }
 
@@ -21,7 +20,7 @@ export default class ExamplePairing extends Component<IProps, {}> {
     }
     let example;
     if (method && method.examples && method.examples[examplePosition]) {
-      example = method.examples[examplePosition] as types.ExamplePairingObject;
+      example = method.examples[examplePosition] as ExamplePairingObject;
     }
     if (!example || _.isEmpty(example)) {
       return null;
@@ -38,7 +37,7 @@ export default class ExamplePairing extends Component<IProps, {}> {
                 id: 1,
                 jsonrpc: "2.0",
                 method: method && method.name,
-                params: (example.params as types.ExampleObject[]).map(((p) => p.value)),
+                params: (example.params as ExampleObject[]).map(((p) => p.value)),
               }} {...this.props.reactJsonOptions} />}
             </CardContent>
           </Card>
@@ -49,7 +48,7 @@ export default class ExamplePairing extends Component<IProps, {}> {
               {example.result && <ReactJson src={{
                 id: 1,
                 jsonrpc: "2.0",
-                result: (example.result as types.ExampleObject).value,
+                result: (example.result as ExampleObject).value,
               }} {...this.props.reactJsonOptions} />}
             </CardContent>
           </Card>

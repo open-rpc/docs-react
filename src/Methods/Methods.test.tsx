@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Methods from "./Methods";
-import { types } from "@open-rpc/meta-schema";
+import { OpenRPC } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -69,7 +69,7 @@ it("renders schema methods description", () => {
         description: "verbose get_pet description",
       },
     ],
-  } as types.OpenRPC;
+  } as OpenRPC;
   ReactDOM.render(<Methods schema={schema}/>, div);
   expect(div.innerHTML.includes("verbose get_pet description")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -156,8 +156,8 @@ it("renders schema methods tags", () => {
           },
           {
             name: "tag4",
-          }
-        ]
+          },
+        ],
       },
       {
         result: {

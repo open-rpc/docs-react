@@ -44,9 +44,9 @@ npm install @open-rpc/docs-react @open-rpc/meta-schema --save
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Documentation from "@open-rpc/docs-react";
-import { types } from '@open-rpc/meta-schema';
+import { OpenRPC } from '@open-rpc/meta-schema';
 
-const schema: types.OpenRPC = {
+const schema: OpenRPC = {
   openrpc: "1.0.0-rc1",
   info: {
     "version": "0.0.0-development",

@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import ExamplePairing from "../ExamplePairing/ExamplePairing";
 import { Typography, List, ListItem, ListItemText, Grid, MenuItem, Menu, withStyles } from "@material-ui/core";
-import { types } from "@open-rpc/meta-schema";
+import { MethodObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 
 interface IProps {
-  method?: types.MethodObject;
-  examples?: types.ExamplePairingObject[];
+  method?: MethodObject;
+  examples?: ExamplePairingObject[];
   reactJsonOptions?: any;
 }
 
 interface IState {
   anchorEl: Element | null;
   selectedIndex: number;
-  currentExample?: types.ExamplePairingObject;
+  currentExample?: ExamplePairingObject;
 }
 
 class ExamplePairings extends Component<IProps, IState> {
