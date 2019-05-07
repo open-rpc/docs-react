@@ -41,6 +41,22 @@ class JSONSchemaFields extends Component<IProps> {
             </TableHead>
             <TableBody>
               {schema.properties && _.map(schema.properties, (prop, name) => {
+                // support nested objects
+                if (prop.type === "object") {
+                  return (
+                    <TableRow>
+                      <TableCell colSpan={1}>
+                        {name}
+                      </TableCell>
+                      <TableCell colSpan={1}>
+                        <Typography variant="body1" color="primary">object</Typography>
+                      </TableCell>
+                      <TableCell colSpan={5}>
+                         <WrappedJSONSchemaFields schema={prop}/>
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
                 if (prop.oneOf) {
                   return (
                     <TableRow>
@@ -77,5 +93,6 @@ class JSONSchemaFields extends Component<IProps> {
     );
   }
 }
+const WrappedJSONSchemaFields = withStyles(styles)(JSONSchemaFields);
 
-export default withStyles(styles)(JSONSchemaFields);
+export default WrappedJSONSchemaFields;

@@ -14,15 +14,15 @@ class JSONSchema extends Component<IProps> {
     const { schema } = this.props;
     if (!schema) { return null; }
     if (_.isEmpty(schema)) { return null; }
-    if (schema && schema.type && !schema.properties && schema.oneOf) {
+    if (schema && !schema.properties && schema.oneOf) {
       return (
         <>
           {schema.oneOf &&
             <>
-              <Typography variant="body1">One Of</Typography>}
+              <Typography variant="body1">one of</Typography>
               {schema.oneOf.map((item) => {
                 return (
-                  <PrimitiveField schema={item} />
+                  <JSONSchema schema={item} />
                 );
               })}
             </>
@@ -35,11 +35,11 @@ class JSONSchema extends Component<IProps> {
       arrayWithItems = _.isArray(arrayWithItems) ? arrayWithItems : [arrayWithItems];
       return (
         <>
-          <Typography variant="body1">Array Of</Typography>
+          <Typography variant="body1">array of</Typography>
           <JSONSchemaFields schema={schema} />
           {arrayWithItems.map((item: JSONSchema4) => {
             return (
-              <PrimitiveField schema={item} />
+              <JSONSchema schema={item} />
             );
           })}
         </>

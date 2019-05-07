@@ -75,3 +75,25 @@ it("renders with a schema without required", () => {
 
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it("renders with a nested schema object", () => {
+  const div = document.createElement("div");
+  const schema = {
+    properties: {
+      name: {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string"
+          }
+        }
+      },
+    },
+  } as JSONSchema4;
+  ReactDOM.render(<JSONSchemaFields schema={schema}/>, div);
+  console.log('div', div.innerHTML);
+  expect(div.innerHTML.includes("foo")).toBe(true);
+  expect(div.innerHTML.includes("string")).toBe(true);
+  expect(div.innerHTML.includes("object")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
