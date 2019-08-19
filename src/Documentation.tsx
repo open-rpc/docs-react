@@ -1,7 +1,7 @@
 import React from "react";
 import Info from "./Info/Info";
 import Servers from "./Servers/Servers";
-import Methods from "./Methods/Methods";
+import Methods, { IMethodPluginProps } from "./Methods/Methods";
 import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
 import { OpenRPC } from "@open-rpc/meta-schema";
 
@@ -9,6 +9,7 @@ interface IProps {
   schema: OpenRPC;
   uiSchema?: any;
   reactJsonOptions?: any;
+  methodPlugins?: Array<React.FC<IMethodPluginProps>>;
 }
 
 export default class Documentation extends React.Component<IProps> {
@@ -24,7 +25,12 @@ export default class Documentation extends React.Component<IProps> {
       <>
         <Info schema={schema} />
         <Servers servers={schema.servers} reactJsonOptions={reactJsonOptions} />
-        <Methods schema={schema} uiSchema={uiSchema} reactJsonOptions={reactJsonOptions} />
+        <Methods
+          schema={schema}
+          uiSchema={uiSchema}
+          reactJsonOptions={reactJsonOptions}
+          methodPlugins={this.props.methodPlugins}
+        />
         <ContentDescriptors schema={schema} uiSchema={uiSchema}></ContentDescriptors>
       </>
     );

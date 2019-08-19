@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Methods from "./Methods";
+import Methods, { IMethodPluginProps } from "./Methods";
 import { OpenRPC } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
@@ -41,6 +41,29 @@ it("renders schema methods name", () => {
   };
   ReactDOM.render(<Methods schema={schema as any}/>, div);
   expect(div.innerHTML.includes("get_pet")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders schema plugin", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        name: "get_pet",
+      },
+    ],
+  };
+  const TestComponent: React.FC<IMethodPluginProps> = (props) => {
+    return (
+      <div>
+        Plugin Test
+      </div>
+    );
+  };
+
+  ReactDOM.render(<Methods schema={schema as any} methodPlugins={[TestComponent]}/>, div);
+  expect(div.innerHTML.includes("get_pet")).toBe(true);
+  expect(div.innerHTML.includes("Plugin Test")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
 

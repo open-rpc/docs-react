@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, Theme, withStyles, WithStyles } from "@material-ui/core";
 import ReactJson from "react-json-view";
 import ReactMarkdown from "react-markdown";
 import { MethodObject, ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
 
-interface IProps {
+interface IProps extends WithStyles<typeof styles> {
   examplePosition?: number;
   method?: MethodObject;
   reactJsonOptions?: any;
 }
 
-export default class ExamplePairing extends Component<IProps, {}> {
+const styles = (theme: Theme) => ({
+  description: {
+    color: theme.palette.text.primary,
+  },
+});
+
+class ExamplePairing extends Component<IProps, {}> {
   public render() {
-    const { examplePosition, method } = this.props;
+    const { examplePosition, method, classes } = this.props;
     if (_.isUndefined(examplePosition)) {
       return null;
     }
@@ -28,7 +34,7 @@ export default class ExamplePairing extends Component<IProps, {}> {
     return (
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <ReactMarkdown source={example.description} />
+          <ReactMarkdown source={example.description} className={classes.description}/>
         </Grid>
         <Grid item xs={6}>
           <Card>
@@ -57,3 +63,5 @@ export default class ExamplePairing extends Component<IProps, {}> {
     );
   }
 }
+
+export default withStyles(styles)(ExamplePairing);

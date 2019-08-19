@@ -22,6 +22,9 @@ import Links from "../Links/Links";
 import Tags from "../Tags/Tags";
 
 const styles = (theme: Theme) => ({
+  description: {
+    color: theme.palette.text.primary,
+  },
   heading: {
     flexBasis: "33.33%",
     flexShrink: 0,
@@ -38,10 +41,15 @@ const styles = (theme: Theme) => ({
   },
 });
 
+export interface IMethodPluginProps {
+  openrpcMethodObject: MethodObject;
+}
+
 interface IProps extends WithStyles<typeof styles> {
   schema?: OpenRPC;
   uiSchema?: any;
   reactJsonOptions?: object;
+  methodPlugins?: Array<React.FC<IMethodPluginProps>>;
 }
 
 class Methods extends Component<IProps> {
@@ -70,7 +78,7 @@ class Methods extends Component<IProps> {
             }
             {method.description &&
               <ExpansionPanelDetails key="description">
-                <ReactMarkdown source={method.description} />
+                <ReactMarkdown source={method.description} className={classes.description}/>
               </ExpansionPanelDetails>
             }
             {method.params && method.params.length > 0 &&
@@ -116,6 +124,15 @@ class Methods extends Component<IProps> {
             {method.links && method.links.length > 0 &&
               <ExpansionPanelDetails key="links">
                 <Links links={method.links} reactJsonOptions={this.props.reactJsonOptions} />
+              </ExpansionPanelDetails>
+            }
+            {this.props.methodPlugins && this.props.methodPlugins.length > 0 &&
+              <ExpansionPanelDetails key="method-plugins">
+                {this.props.methodPlugins.map((CompDef: any) => {
+                  return (
+                    <CompDef openrpcMethodObject={method} />
+                  );
+                })}
               </ExpansionPanelDetails>
             }
           </ExpansionPanel>
