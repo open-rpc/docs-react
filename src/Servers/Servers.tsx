@@ -10,6 +10,9 @@ import ReactJson from "react-json-view";
 import ExpansionTable from "../ExpansionTable/ExpansionTable";
 
 const styles = (theme: Theme) => ({
+  description: {
+    color: theme.palette.text.primary,
+  },
   heading: {
     flexBasis: "33.33%",
     flexShrink: 0,
@@ -58,7 +61,9 @@ class Servers extends Component<IProps> {
                       </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={{ display: "block" }} key="servers-body">
-                      {server.description && <ReactMarkdown source={server.description} />}
+                      {server.description &&
+                        <ReactMarkdown source={server.description} className={classes.description} />
+                      }
                       {server.variables &&
                         <Typography variant="h6" gutterBottom className={classes.paramsMargin}>Variables</Typography>}
                       {server.variables && <ReactJson src={server.variables} {...reactJsonOptions} />}

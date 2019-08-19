@@ -9,6 +9,9 @@ import ReactMarkdown from "react-markdown";
 import { ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
+  description: {
+    color: theme.palette.text.primary,
+  },
   heading: {
     flexBasis: "33.33%",
     flexShrink: 0,
@@ -52,7 +55,9 @@ class ContentDescriptor extends Component<IProps> {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails style={{ display: "block" }}>
           <div>
-            {contentDescriptor.description && <ReactMarkdown source={contentDescriptor.description} />}
+            {contentDescriptor.description &&
+              <ReactMarkdown source={contentDescriptor.description} className={classes.description} />
+            }
             {contentDescriptor.schema &&
               <>
                 <Typography variant="body1" color="primary">schema</Typography>

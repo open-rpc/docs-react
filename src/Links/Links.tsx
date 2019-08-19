@@ -17,6 +17,9 @@ import Servers from "../Servers/Servers";
 import ReactJson from "react-json-view";
 
 const styles = (theme: Theme) => ({
+  description: {
+    color: theme.palette.text.primary,
+  },
   heading: {
     flexBasis: "33.33%",
     flexShrink: 0,
@@ -58,7 +61,7 @@ class Links extends Component<IProps> {
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails style={{ display: "block" }} key="links-body">
-                    {link.description && <ReactMarkdown source={link.description} />}
+                    {link.description && <ReactMarkdown source={link.description} className={classes.description} />}
                     {link.params && <Typography variant="h6" gutterBottom>Params</Typography>}
                     {link.params && <ReactJson src={link.params} {...reactJsonOptions} />}
                     {link.server &&

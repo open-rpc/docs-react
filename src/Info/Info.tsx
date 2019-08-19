@@ -14,6 +14,7 @@ const styles = (theme: Theme) => ({
     margin: theme.spacing.unit,
   },
   description: {
+    color: theme.palette.text.primary,
     padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit}px 0`,
   },
 });
@@ -41,7 +42,7 @@ class Info extends Component<IProps> {
             clickable
             color="primary"
             label={info.license.name} />}
-        {info.description && <ReactMarkdown source={info.description}/>}
+        {info.description && <ReactMarkdown className={classes.description} source={info.description}/>}
         {info.termsOfService &&
           <Button className={classes.button} variant="contained" href={info.termsOfService}>Terms Of Service</Button>}
         {info.contact &&
