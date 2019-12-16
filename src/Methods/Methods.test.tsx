@@ -44,7 +44,7 @@ it("renders schema methods name", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it("doesnt renders collapsed contents", () => {
+it("doesnt render collapsed contents", () => {
   const div = document.createElement("div");
   const schema = {
     methods: [
