@@ -44,6 +44,38 @@ it("renders schema methods name", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+it("doesnt renders collapsed contents", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any} />, div);
+  expect(div.innerHTML.includes("foobarz")).toBe(false);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders collapsed contents with disableTransitionProps", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
+  expect(div.innerHTML.includes("foobarz")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
 it("renders schema plugin", () => {
   const div = document.createElement("div");
   const schema = {
