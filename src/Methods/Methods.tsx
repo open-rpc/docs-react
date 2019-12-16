@@ -62,6 +62,7 @@ class Methods extends Component<IProps> {
     const methods: MethodObject[] = schema.methods;
     const methodsExist = methods && methods.length > 0;
     if (!schema || !schema.methods || !methodsExist) { return null; }
+    console.log("uiSchema", uiSchema); // tslint:disable-line
     return (
       <div className={classes.root}>
         <Typography variant="h3" gutterBottom>Methods</Typography>
