@@ -32,7 +32,7 @@ class ExamplePairing extends Component<IProps, {}> {
       return null;
     }
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={10}>
         <Grid item xs={12}>
           <ReactMarkdown source={example.description} className={classes.description}/>
         </Grid>

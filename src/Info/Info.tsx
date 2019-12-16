@@ -8,14 +8,14 @@ import { OpenRPC } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(2),
   },
   chip: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(2),
   },
   description: {
     color: theme.palette.text.primary,
-    padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit}px 0`,
+    padding: `${theme.spacing(2)}px 0 ${theme.spacing(2)}px 0`,
   },
 });
 

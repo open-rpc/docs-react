@@ -13,7 +13,7 @@ import { ErrorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   code: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(2),
   },
 });
 

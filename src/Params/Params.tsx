@@ -10,16 +10,16 @@ import { ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 const styles = (theme: Theme) => ({
   schema: {
-    marginLeft: theme.spacing.unit * 4,
+    marginLeft: theme.spacing(8),
   },
   table: {
-    padding: theme.spacing.unit,
+    padding: theme.spacing(2),
   },
   tableEnd: {
-    paddingRight: `${theme.spacing.unit * 10}px !important`,
+    paddingRight: `${theme.spacing(20)}px !important`,
   },
   tableStart: {
-    paddingLeft: theme.spacing.unit * 6,
+    paddingLeft: theme.spacing(3),
   },
 });
 

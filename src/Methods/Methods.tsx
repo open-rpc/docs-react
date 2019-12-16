@@ -31,8 +31,8 @@ const styles = (theme: Theme) => ({
     fontSize: theme.typography.pxToRem(15),
   },
   root: {
-    marginBottom: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(3),
     width: "100%",
   },
   secondaryHeading: {
@@ -50,11 +50,12 @@ interface IProps extends WithStyles<typeof styles> {
   uiSchema?: any;
   reactJsonOptions?: object;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
+  disableTransitionProps?: boolean;
 }
 
 class Methods extends Component<IProps> {
   public render() {
-    const { schema, classes, uiSchema } = this.props;
+    const { schema, classes, uiSchema, disableTransitionProps } = this.props;
     if (!schema) {
       return null;
     }
@@ -65,7 +66,11 @@ class Methods extends Component<IProps> {
       <div className={classes.root}>
         <Typography variant="h3" gutterBottom>Methods</Typography>
         {schema.methods.map((method, i) => (
-          <ExpansionPanel key={i + method.name} defaultExpanded={uiSchema && uiSchema.methods["ui:defaultExpanded"]}>
+          <ExpansionPanel
+            key={i + method.name}
+            TransitionProps={{unmountOnExit: disableTransitionProps ? false : true}}
+            defaultExpanded={uiSchema && uiSchema.methods["ui:defaultExpanded"]}
+          >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography key={method.name} className={classes.heading}>{method.name}</Typography>
               <Typography key={method.summary} className={classes.secondaryHeading}>{method.summary}</Typography>
@@ -78,7 +83,7 @@ class Methods extends Component<IProps> {
             }
             {method.description &&
               <ExpansionPanelDetails key="description">
-                <ReactMarkdown source={method.description} className={classes.description}/>
+                <ReactMarkdown source={method.description} className={classes.description} />
               </ExpansionPanelDetails>
             }
             {method.params && method.params.length > 0 &&

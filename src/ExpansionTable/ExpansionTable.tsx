@@ -16,8 +16,8 @@ const styles = (theme: Theme) => ({
     fontSize: theme.typography.pxToRem(15),
   },
   root: {
-    marginBottom: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(6),
     width: "100%",
   },
   secondaryHeading: {
