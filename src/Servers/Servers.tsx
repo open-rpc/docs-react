@@ -19,7 +19,7 @@ const styles = (theme: Theme) => ({
     fontSize: theme.typography.pxToRem(15),
   },
   paramsMargin: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(2),
   },
   secondaryHeading: {
     alignSelf: "end",
