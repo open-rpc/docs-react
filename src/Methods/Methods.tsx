@@ -50,11 +50,12 @@ interface IProps extends WithStyles<typeof styles> {
   uiSchema?: any;
   reactJsonOptions?: object;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
+  disableTransitionProps?: boolean;
 }
 
 class Methods extends Component<IProps> {
   public render() {
-    const { schema, classes, uiSchema } = this.props;
+    const { schema, classes, uiSchema, disableTransitionProps } = this.props;
     if (!schema) {
       return null;
     }
@@ -67,7 +68,7 @@ class Methods extends Component<IProps> {
         {schema.methods.map((method, i) => (
           <ExpansionPanel
             key={i + method.name}
-            TransitionProps={{unmountOnExit: true}}
+            TransitionProps={{unmountOnExit: disableTransitionProps ? false : true}}
             defaultExpanded={uiSchema && uiSchema.methods["ui:defaultExpanded"]}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

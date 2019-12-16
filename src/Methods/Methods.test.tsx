@@ -39,7 +39,7 @@ it("renders schema methods name", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("get_pet")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -61,7 +61,7 @@ it("renders schema plugin", () => {
     );
   };
 
-  ReactDOM.render(<Methods schema={schema as any} methodPlugins={[TestComponent]}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} methodPlugins={[TestComponent]} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("get_pet")).toBe(true);
   expect(div.innerHTML.includes("Plugin Test")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -79,7 +79,7 @@ it("renders schema methods summary", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("a short summary")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -93,7 +93,7 @@ it("renders schema methods description", () => {
       },
     ],
   } as OpenRPC;
-  ReactDOM.render(<Methods schema={schema}/>, div);
+  ReactDOM.render(<Methods schema={schema} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("verbose get_pet description")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -109,7 +109,7 @@ it("renders schema methods params", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("foobarz")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -141,7 +141,7 @@ it("renders schema methods result", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("name")).toBe(true);
   expect(div.innerHTML.includes("tag")).toBe(true);
   expect(div.innerHTML.includes("id")).toBe(true);
@@ -213,7 +213,7 @@ it("renders schema methods tags", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("tag3")).toBe(true);
   expect(div.innerHTML.includes("tag4")).toBe(true);
   expect(div.innerHTML.includes("salad")).toBe(true);
