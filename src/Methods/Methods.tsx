@@ -52,7 +52,7 @@ interface IProps extends WithStyles<typeof styles> {
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
 }
 
-class Methods extends Component<IProps, IState> {
+class Methods extends Component<IProps> {
   public render() {
     const { schema, classes, uiSchema } = this.props;
     if (!schema) {
