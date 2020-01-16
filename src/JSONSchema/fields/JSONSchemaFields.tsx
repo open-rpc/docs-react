@@ -34,6 +34,7 @@ class JSONSchemaFields extends Component<IProps> {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
+                <TableCell>Title</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Pattern</TableCell>
                 <TableCell>Required</TableCell>
