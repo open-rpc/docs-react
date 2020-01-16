@@ -22,7 +22,10 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
+          {name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title}
         </TableCell>
         <TableCell colSpan={1} style={styles.cellWidth}>
           <Typography variant="body1" color="primary">any of</Typography>
@@ -37,7 +40,10 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
+          {name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title}
         </TableCell>
         <TableCell colSpan={1} style={styles.cellWidth}>
           <Typography variant="body1" color="primary">all of</Typography>
@@ -67,7 +73,10 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
+          {name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title}
         </TableCell>
         <TableCell colSpan={1} style={styles.cellWidth}>
           <Typography variant="body1" color="primary">array of</Typography>
@@ -82,7 +91,10 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
+          {name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title}
         </TableCell>
         <TableCell colSpan={1} style={styles.cellWidth}>
           <Typography variant="body1" color="primary">array of</Typography>
@@ -98,7 +110,10 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
+          {name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title}
         </TableCell>
         <TableCell colSpan={1} style={styles.cellWidth}>
           <Typography variant="body1" color="primary">object</Typography>
@@ -108,6 +123,7 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
+                <TableCell>Title</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Pattern</TableCell>
                 <TableCell>Required</TableCell>
@@ -147,8 +163,11 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
   };
   return (
     <TableRow key={schema.title}>
-      <TableCell component="th" scope="row" style={styles.cellWidth}>
-        {schema.title || name}
+      <TableCell colSpan={1} style={styles.cellWidth}>
+        {name}
+      </TableCell>
+      <TableCell colSpan={1} style={styles.cellWidth}>
+        {schema.title}
       </TableCell>
       <TableCell style={{
         ...styles.cellWidth,
