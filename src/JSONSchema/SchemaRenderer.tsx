@@ -3,6 +3,7 @@ import { JSONSchema4 } from "json-schema";
 import { TableRow, TableCell, Typography } from "@material-ui/core";
 import JSONSchemaFields from "./fields/JSONSchemaFields";
 import _ from "lodash";
+import { grey, green, purple, yellow, blue } from "@material-ui/core/colors";
 
 interface IProps {
   schema: JSONSchema4;
@@ -12,38 +13,11 @@ interface IProps {
 
 const styles = {
   cellWidth: {
-    margin: "5px",
-    padding: "5px",
     width: "70px",
   },
 };
 
 const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
-  if (schema.type === "object" || schema.properties) {
-    return (
-      <TableRow>
-        <TableCell colSpan={1} style={styles.cellWidth}>
-          {schema.title || name}
-        </TableCell>
-        <TableCell colSpan={1} style={styles.cellWidth}>
-          <Typography variant="body1" color="primary">object</Typography>
-        </TableCell>
-        <TableCell colSpan={5}>
-          {schema.properties && Object.entries(schema.properties).map(([n, prop]: [string, JSONSchema4], i: number) => {
-            return (
-              <JSONSchemaFields
-                key={n}
-                schema={prop}
-                name={n}
-                hideHeader={i !== 0}
-                required={schema.required && schema.required.includes(n)}
-              />
-            );
-          })}
-        </TableCell>
-      </TableRow>
-    );
-  }
   if (schema.anyOf) {
     return (
       <TableRow>
@@ -89,7 +63,7 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
       </TableRow>
     );
   }
-  if (schema.type === "array" && schema.items instanceof Array) {
+  if (schema.items instanceof Array) {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
@@ -104,7 +78,7 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
       </TableRow>
     );
   }
-  if (schema.type === "array" && schema.items) {
+  if (schema.items) {
     return (
       <TableRow>
         <TableCell colSpan={1} style={styles.cellWidth}>
@@ -119,14 +93,54 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
       </TableRow>
     );
   }
+
+  if (schema.properties) {
+    return (
+      <TableRow>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          {schema.title || name}
+        </TableCell>
+        <TableCell colSpan={1} style={styles.cellWidth}>
+          <Typography variant="body1" color="primary">object</Typography>
+        </TableCell>
+        <TableCell colSpan={5}>
+          {schema.properties && Object.entries(schema.properties).map(([n, prop]: [string, JSONSchema4], i: number) => {
+            return (
+              <JSONSchemaFields
+                key={n}
+                schema={prop}
+                name={n}
+                hideHeader={i !== 0}
+                required={schema.required && schema.required.includes(n)}
+              />
+            );
+          })}
+        </TableCell>
+      </TableRow>
+    );
+  }
+
+  const colorMap: {[k: string]: string} = {
+    any: grey[500],
+    array: blue[300],
+    boolean: blue[500],
+    integer: purple[800],
+    null: yellow[900],
+    number: purple[500],
+    string: green[500],
+    undefined: grey[500],
+  };
   return (
     <TableRow key={schema.title}>
       <TableCell component="th" scope="row" style={styles.cellWidth}>
         {schema.title || name}
       </TableCell>
-      <TableCell style={styles.cellWidth}>{schema.type}</TableCell>
+      <TableCell style={{
+        ...styles.cellWidth,
+        color: colorMap[schema.type as any],
+      }}>{schema.type}</TableCell>
       <TableCell style={styles.cellWidth}>{schema.pattern}</TableCell>
-      <TableCell style={styles.cellWidth}>{required ? "required" : "optional"}</TableCell>
+      <TableCell style={styles.cellWidth}>{required ? "yes" : ""}</TableCell>
       <TableCell style={styles.cellWidth}>{schema.description}</TableCell>
     </TableRow>
   );
