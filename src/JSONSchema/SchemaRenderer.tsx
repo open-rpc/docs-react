@@ -1,6 +1,6 @@
 import React from "react";
 import { JSONSchema4 } from "json-schema";
-import { TableRow, TableCell, Typography } from "@material-ui/core";
+import { TableRow, TableCell, Typography, Table, TableHead, TableBody } from "@material-ui/core";
 import JSONSchemaFields from "./fields/JSONSchemaFields";
 import _ from "lodash";
 import { grey, green, purple, yellow, blue } from "@material-ui/core/colors";
@@ -104,23 +104,38 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
           <Typography variant="body1" color="primary">object</Typography>
         </TableCell>
         <TableCell colSpan={5}>
-          {schema.properties && Object.entries(schema.properties).map(([n, prop]: [string, JSONSchema4], i: number) => {
-            return (
-              <JSONSchemaFields
-                key={n}
-                schema={prop}
-                name={n}
-                hideHeader={i !== 0}
-                required={schema.required && schema.required.includes(n)}
-              />
-            );
-          })}
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Pattern</TableCell>
+                <TableCell>Required</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {schema.properties &&
+                Object.entries(schema.properties)
+                  .map(([n, prop]: [string, JSONSchema4], i: number) => {
+                    return (
+                      <JSONSchemaFields
+                        key={n}
+                        schema={prop}
+                        name={n}
+                        hideHeader={true}
+                        required={schema.required && schema.required.includes(n)}
+                      />
+                    );
+                  })}
+            </TableBody>
+          </Table>
         </TableCell>
       </TableRow>
     );
   }
 
-  const colorMap: {[k: string]: string} = {
+  const colorMap: { [k: string]: string } = {
     any: grey[500],
     array: blue[300],
     boolean: blue[500],
