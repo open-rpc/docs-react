@@ -140,7 +140,7 @@ const SchemaRenderer: React.FC<IProps> = ({ schema, required, name }) => {
         color: colorMap[schema.type as any],
       }}>{schema.type}</TableCell>
       <TableCell style={styles.cellWidth}>{schema.pattern}</TableCell>
-      <TableCell style={styles.cellWidth}>{required ? "yes" : ""}</TableCell>
+      <TableCell style={styles.cellWidth}>{required ? "true" : "false"}</TableCell>
       <TableCell style={styles.cellWidth}>{schema.description}</TableCell>
     </TableRow>
   );

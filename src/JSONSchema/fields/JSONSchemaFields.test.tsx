@@ -54,7 +54,7 @@ it("renders with a schema required", () => {
     ],
   } as JSONSchema4;
   ReactDOM.render(<JSONSchemaFields schema={schema} />, div);
-  expect(div.innerHTML.includes("required")).toBe(true);
+  expect(div.innerHTML.includes("true")).toBe(true);
 
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -69,7 +69,7 @@ it("renders with a schema without required", () => {
     },
   } as JSONSchema4;
   ReactDOM.render(<JSONSchemaFields schema={schema} />, div);
-  expect(div.innerHTML.includes("optional")).toBe(true);
+  expect(div.innerHTML.includes("false")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
 
