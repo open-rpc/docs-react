@@ -28,18 +28,20 @@ interface IProps extends WithStyles<typeof styles> {
   contentDescriptor?: ContentDescriptorObject;
   hideIcon?: boolean;
   hideRequired?: boolean;
+  disableTransitionProps?: boolean;
   uiSchema?: any;
 }
 
 class ContentDescriptor extends Component<IProps> {
   public render() {
-    const { contentDescriptor, classes, hideIcon, hideRequired, uiSchema } = this.props;
+    const { contentDescriptor, classes, hideIcon, hideRequired, uiSchema, disableTransitionProps } = this.props;
     if (!contentDescriptor) { return null; }
     const entries = Object.entries(contentDescriptor);
     if (entries.length === 0) { return null; }
     return (
       <ExpansionPanel
         style={{ width: "100%" }}
+        TransitionProps={{unmountOnExit: disableTransitionProps ? false : true}}
         defaultExpanded={uiSchema && uiSchema.params["ui:defaultExpanded"]}
         expanded={contentDescriptor.name ? undefined : true}>
         <ExpansionPanelSummary
@@ -53,8 +55,8 @@ class ContentDescriptor extends Component<IProps> {
             </Typography>}
           </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails style={{ display: "block" }}>
-          <div>
+        <ExpansionPanelDetails style={{ display: "block", overflowX: "auto" }}>
+          <>
             {contentDescriptor.description &&
               <ReactMarkdown source={contentDescriptor.description} className={classes.description} />
             }
@@ -64,7 +66,7 @@ class ContentDescriptor extends Component<IProps> {
                 <JSONSchema schema={contentDescriptor.schema} />
               </>
             }
-          </div>
+          </>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );

@@ -33,7 +33,7 @@ it("renders params", () => {
       },
     },
   ];
-  ReactDOM.render(<Params params={params}/>, div);
+  ReactDOM.render(<Params params={params} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("tags")).toBe(true);
   expect(div.innerHTML.includes("tags to filter by")).toBe(true);
   expect(div.innerHTML.includes("string")).toBe(true);
