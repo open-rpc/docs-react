@@ -25,6 +25,7 @@ const styles = (theme: Theme) => ({
 
 interface IProps extends WithStyles<typeof styles> {
   params?: ContentDescriptorObject[];
+  disableTransitionProps?: boolean;
   uiSchema?: any;
 }
 
@@ -46,7 +47,16 @@ class Params extends Component<IProps> {
         <TableBody>
           <TableRow>
             <TableCell colSpan={6}>
-              {params.map((row) => <ContentDescriptor key={row.name} contentDescriptor={row} uiSchema={uiSchema}/>) }
+              {
+                params.map((row) =>
+                  <ContentDescriptor
+                    key={row.name}
+                    contentDescriptor={row}
+                    uiSchema={uiSchema}
+                    disableTransitionProps={this.props.disableTransitionProps}
+                  />,
+                )
+              }
             </TableCell>
           </TableRow>
         </TableBody>

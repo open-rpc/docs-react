@@ -5,12 +5,13 @@ import { OpenRPC, ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 interface IProps {
   schema?: OpenRPC;
+  disableTransitionProps?: boolean;
   uiSchema?: any;
 }
 
 export default class ContentDescriptors extends Component<IProps> {
   public render() {
-    const { schema } = this.props;
+    const { schema, disableTransitionProps } = this.props;
     if (!schema || !schema.components  || !schema.components.contentDescriptors) { return null; }
     const entries = Object.entries(schema.components.contentDescriptors);
     if (entries.length === 0) { return null; }
@@ -21,6 +22,7 @@ export default class ContentDescriptors extends Component<IProps> {
           return <ContentDescriptor
             key={key}
             contentDescriptor={val as ContentDescriptorObject}
+            disableTransitionProps={disableTransitionProps}
             uiSchema={this.props.uiSchema}
             hideRequired={true} />;
         })}

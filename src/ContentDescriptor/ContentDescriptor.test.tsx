@@ -19,14 +19,16 @@ it("renders empty with no schema", () => {
 it("renders empty with empty schema", () => {
   const div = document.createElement("div");
   const emptyContentDescriptor = {} as ContentDescriptorObject;
-  ReactDOM.render(<ContentDescriptor contentDescriptor={emptyContentDescriptor}/>, div);
+  ReactDOM.render(<ContentDescriptor contentDescriptor={emptyContentDescriptor} />, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it("renders a name", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<ContentDescriptor contentDescriptor={{name: "foo", schema: {}}}/>, div);
+  ReactDOM.render(
+    <ContentDescriptor contentDescriptor={{ name: "foo", schema: {} }} disableTransitionProps={true} />
+  , div);
   expect(div.innerHTML.includes("foo")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });

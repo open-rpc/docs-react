@@ -35,7 +35,7 @@ it("renders a name", () => {
       },
     },
   } as any;
-  ReactDOM.render(<ContentDescriptors schema={schema}/>, div);
+  ReactDOM.render(<ContentDescriptors schema={schema} disableTransitionProps={true}/>, div);
   expect(div.innerHTML.includes("foo")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
