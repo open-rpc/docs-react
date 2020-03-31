@@ -6,7 +6,9 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import JSONSchema from "../JSONSchema/JSONSchema";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ReactMarkdown from "react-markdown";
+import JSONSchemaTree from "@xops.net/json-schema-to-react-tree";
 import { ContentDescriptorObject } from "@open-rpc/meta-schema";
+import "./ContentDescriptor.css";
 
 const styles = (theme: Theme) => ({
   description: {
@@ -47,7 +49,7 @@ class ContentDescriptor extends Component<IProps> {
         <ExpansionPanelSummary
           expandIcon={(!contentDescriptor.name || hideIcon) ? null : <ExpandMoreIcon />}
           style={{ justifyContent: "space-between" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", height: "100%" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", height: "100%", alignItems: "center" }}>
             <Typography className={classes.heading}>{contentDescriptor.name}</Typography>
             <Typography className={classes.secondaryHeading}>{contentDescriptor.summary}</Typography>
             {hideRequired ? null : <Typography className={classes.secondaryHeading}>
@@ -63,7 +65,7 @@ class ContentDescriptor extends Component<IProps> {
             {contentDescriptor.schema &&
               <>
                 <Typography variant="body1" color="primary">schema</Typography>
-                <JSONSchema schema={contentDescriptor.schema} />
+                <JSONSchemaTree schema={contentDescriptor.schema} />
               </>
             }
           </>

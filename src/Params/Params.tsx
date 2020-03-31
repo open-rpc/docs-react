@@ -16,7 +16,7 @@ const styles = (theme: Theme) => ({
     padding: theme.spacing(2),
   },
   tableEnd: {
-    paddingRight: `${theme.spacing(20)}px !important`,
+    paddingLeft: theme.spacing(3),
   },
   tableStart: {
     paddingLeft: theme.spacing(3),
