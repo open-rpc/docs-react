@@ -4,7 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import ReactMarkdown from "react-markdown";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Typography, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel } from "@material-ui/core";
+import { Typography, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, Grid } from "@material-ui/core";
 import { ServerObject } from "@open-rpc/meta-schema";
 import ReactJson from "react-json-view";
 import ExpansionTable from "../ExpansionTable/ExpansionTable";
@@ -54,11 +54,9 @@ class Servers extends Component<IProps> {
                     defaultExpanded={uiSchema && uiSchema.servers["ui:defaultExpanded"]} key={i}>
                     <ExpansionPanelSummary
                       style={{ justifyContent: "space-between" }} key="servers-header" expandIcon={<ExpandMoreIcon />}>
-                      <div style={{ display: "flex", justifyContent: "space-between", width: "100%", height: "100%" }}>
-                        <Typography className={classes.heading}>{server.name}</Typography>
-                        <Typography className={classes.secondaryHeading}>{server.url}</Typography>
-                        <Typography className={classes.secondaryHeading}>{server.summary}</Typography>
-                      </div>
+                      <Typography className={classes.heading}>{server.name}</Typography>
+                      <Typography className={classes.secondaryHeading}>{server.url}</Typography>
+                      <Typography className={classes.secondaryHeading}>{server.summary}</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={{ display: "block" }} key="servers-body">
                       {server.description &&
