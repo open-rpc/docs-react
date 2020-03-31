@@ -6,5 +6,8 @@ module.exports = {
   "rootDir": "./src",
   "testEnvironment": "jsdom",
   "testPathIgnorePatterns": ["./build"],
-  "preset": "ts-jest"
+  "preset": "ts-jest",
+  "moduleNameMapper": {
+    "\\.(css|less|sass|scss)$": "jest-transform-css"
+  }
 }
