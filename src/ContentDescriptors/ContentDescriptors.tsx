@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import { Typography } from "@material-ui/core";
-import { OpenRPC, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument, ContentDescriptorObject } from "@open-rpc/meta-schema";
 
 interface IProps {
-  schema?: OpenRPC;
+  schema?: OpenrpcDocument;
   disableTransitionProps?: boolean;
   uiSchema?: any;
 }
