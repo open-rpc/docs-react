@@ -33,10 +33,7 @@ class ExamplePairing extends Component<IProps, {}> {
     if (!example || _.isEmpty(example)) {
       return null;
     }
-    if (!method) {
-      return;
-    }
-    const paramStructure: TParamStructure = method.paramStructure || "either";
+    const paramStructure: TParamStructure = method?.paramStructure || "either";
     const params = paramStructure === "by-name"
       ? (example.params as ExampleObject[]).reduce(((memo, p) => {
         memo[p.name] = p.value;

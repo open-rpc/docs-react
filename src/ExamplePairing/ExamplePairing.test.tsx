@@ -3,6 +3,21 @@ import ReactDOM from "react-dom";
 import ExamplePairing from "./ExamplePairing";
 import examples from "@open-rpc/examples";
 import refParser from "json-schema-ref-parser";
+import { OpenrpcDocument } from "@open-rpc/meta-schema";
+
+it("renders handles no method", async () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<ExamplePairing method={undefined} examplePosition={0}/>, div);
+  expect(div.innerHTML).toBe("");
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders handles no method examples", async () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<ExamplePairing method={{} as any} examplePosition={0} />, div);
+  expect(div.innerHTML).toBe("");
+  ReactDOM.unmountComponentAtNode(div);
+});
 
 it("renders handles no examplePosition", async () => {
   const div = document.createElement("div");
@@ -11,7 +26,6 @@ it("renders handles no examplePosition", async () => {
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
-import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
 it("renders examples", async () => {
   const div = document.createElement("div");
