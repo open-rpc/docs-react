@@ -80,7 +80,7 @@ class ExamplePairings extends Component<IProps, IState> {
                   {example.name}
                 </MenuItem>
               ))}
-        </Menu>
+            </Menu>
           </List>
         </Grid>
         <Grid item xs={12}>

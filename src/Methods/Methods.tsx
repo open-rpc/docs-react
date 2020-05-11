@@ -12,11 +12,12 @@ import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import ExamplePairings from "../ExamplePairings/ExamplePairings";
 import Errors from "../Errors/Errors";
 import {
-  OpenRPC,
+  OpenrpcDocument,
   MethodObject,
   ContentDescriptorObject,
   ErrorObject,
   ExamplePairingObject,
+  LinkObject,
 } from "@open-rpc/meta-schema";
 import Links from "../Links/Links";
 import Tags from "../Tags/Tags";
@@ -46,7 +47,7 @@ export interface IMethodPluginProps {
 }
 
 interface IProps extends WithStyles<typeof styles> {
-  schema?: OpenRPC;
+  schema?: OpenrpcDocument;
   uiSchema?: any;
   reactJsonOptions?: object;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
@@ -128,7 +129,7 @@ class Methods extends Component<IProps> {
             }
             {method.links && method.links.length > 0 &&
               <ExpansionPanelDetails key="links">
-                <Links links={method.links} reactJsonOptions={this.props.reactJsonOptions} />
+                <Links links={method.links as LinkObject[]} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
             {this.props.methodPlugins && this.props.methodPlugins.length > 0 &&

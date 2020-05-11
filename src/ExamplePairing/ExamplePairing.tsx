@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import { MethodObject, ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
 
+export type TParamStructure = "either" | "by-name" | "by-position";
+
 interface IProps extends WithStyles<typeof styles> {
   examplePosition?: number;
   method?: MethodObject;
@@ -31,10 +33,18 @@ class ExamplePairing extends Component<IProps, {}> {
     if (!example || _.isEmpty(example)) {
       return null;
     }
+    const paramStructure: TParamStructure = method?.paramStructure || "either";
+    const params = paramStructure === "by-name"
+      ? (example.params as ExampleObject[]).reduce(((memo, p) => {
+        memo[p.name] = p.value;
+        return memo;
+      }), {} as any)
+      : (example.params as ExampleObject[]).map(((p) => p.value));
+
     return (
       <Grid container spacing={10}>
         <Grid item xs={12}>
-          <ReactMarkdown source={example.description} className={classes.description}/>
+          <ReactMarkdown source={example.description} className={classes.description} />
         </Grid>
         <Grid item xs={6}>
           <Card>
@@ -43,7 +53,7 @@ class ExamplePairing extends Component<IProps, {}> {
                 id: 1,
                 jsonrpc: "2.0",
                 method: method && method.name,
-                params: (example.params as ExampleObject[]).map(((p) => p.value)),
+                params,
               }} {...this.props.reactJsonOptions} />}
             </CardContent>
           </Card>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Methods, { IMethodPluginProps } from "./Methods";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -151,7 +151,7 @@ it("renders schema methods description", () => {
         description: "verbose get_pet description",
       },
     ],
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Methods schema={schema} disableTransitionProps={true} />, div);
   expect(div.innerHTML.includes("verbose get_pet description")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);

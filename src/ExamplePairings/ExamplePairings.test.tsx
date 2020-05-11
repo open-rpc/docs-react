@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ExamplePairings from "./ExamplePairings";
 import examples from "@open-rpc/examples";
 import refParser from "json-schema-ref-parser";
-import { OpenRPC, ExamplePairingObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument, ExamplePairingObject } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -27,7 +27,7 @@ it("renders empty with empty example", () => {
 
 it("renders examples", async () => {
   const div = document.createElement("div");
-  const simpleMath = await refParser.dereference(examples.simpleMath) as OpenRPC;
+  const simpleMath = await refParser.dereference(examples.simpleMath) as OpenrpcDocument;
   ReactDOM.render(
     <ExamplePairings
       method={simpleMath.methods[0]}

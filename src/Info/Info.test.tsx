@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Info from "./Info";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -18,14 +18,14 @@ it("renders empty with no schema", () => {
 
 it("renders empty with empty schema", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Info schema={{} as OpenRPC}/>, div);
+  ReactDOM.render(<Info schema={{} as OpenrpcDocument}/>, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it("renders empty with empty schema info", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Info schema={{ info: {} } as OpenRPC}/>, div);
+  ReactDOM.render(<Info schema={{ info: {} } as OpenrpcDocument}/>, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -36,7 +36,7 @@ it("renders an info.title for a given schema", () => {
     info: {
       title: "foo",
     },
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Info schema={schema} />, div);
   expect(div.innerHTML.includes("foo")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -48,7 +48,7 @@ it("renders an info.version for a given schema", () => {
     info: {
       version: "1.0.0-rc0",
     },
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Info schema={schema} />, div);
   expect(div.innerHTML.includes("1.0.0-rc0")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -60,7 +60,7 @@ it("renders an info.description for a given schema", () => {
     info: {
       description: "my long verbose description",
     },
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Info schema={schema} />, div);
   expect(div.innerHTML.includes("my long verbose description")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -72,7 +72,7 @@ it("renders an info terms of service for a given schema", () => {
     info: {
       termsOfService: "http://open-rpc.org",
     },
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Info schema={schema} />, div);
   expect(div.innerHTML.includes('"http://open-rpc.org"')).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -88,7 +88,7 @@ it("renders an info contact for a given schema", () => {
         url: "http://open-rpc.org",
       },
     },
-  } as OpenRPC;
+  } as OpenrpcDocument;
   ReactDOM.render(<Info schema={schema} />, div);
   expect(div.innerHTML.includes("OpenRPC Team")).toBe(true);
   expect(div.innerHTML.includes('"http://open-rpc.org"')).toBe(true);

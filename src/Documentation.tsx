@@ -3,10 +3,10 @@ import Info from "./Info/Info";
 import Servers from "./Servers/Servers";
 import Methods, { IMethodPluginProps } from "./Methods/Methods";
 import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
 interface IProps {
-  schema: OpenRPC;
+  schema: OpenrpcDocument;
   uiSchema?: any;
   reactJsonOptions?: any;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
