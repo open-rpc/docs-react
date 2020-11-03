@@ -79,6 +79,39 @@ it("renders examples with only schema examples", async () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+it("renders examples with only schema examples with no params", async () => {
+  const div = document.createElement("div");
+  const testDoc: OpenrpcDocument = {
+    info: {
+      title: "test",
+      version: "0.0.0",
+    },
+    methods: [
+      {
+        name: "test-method",
+        params: [],
+        result: {
+          name: "test-method-result",
+          schema: {
+            examples: ["potato"],
+            type: "string",
+          },
+        },
+      },
+    ],
+    openrpc: "1.0.0",
+  };
+  ReactDOM.render(
+    <ExamplePairings
+      method={testDoc.methods[0]}
+      examples={testDoc.methods[0].examples as ExamplePairingObject[]
+      } />
+    , div);
+  expect(div.innerHTML.includes("potato")).toBe(true);
+  expect(div.innerHTML.includes("bob")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
 it("renders examples with only schema examples and no method", async () => {
   const div = document.createElement("div");
   const testDoc: OpenrpcDocument = {

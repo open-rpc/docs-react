@@ -7,7 +7,7 @@ import { MethodObject, OpenrpcDocument, ExamplePairingObject } from "@open-rpc/m
 
 it("renders handles no method", async () => {
   const div = document.createElement("div");
-  ReactDOM.render(<ExamplePairing methodName={undefined} />, div);
+  ReactDOM.render(<ExamplePairing methodName={undefined} examplePairing={{} as any} />, div);
   expect(div.innerHTML).toBe("");
   ReactDOM.unmountComponentAtNode(div);
 });
