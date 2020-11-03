@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ExamplePairing from "../ExamplePairing/ExamplePairing";
 import { Typography, List, ListItem, ListItemText, Grid, MenuItem, Menu, withStyles } from "@material-ui/core";
-import { MethodObject, ExamplePairingObject } from "@open-rpc/meta-schema";
+import { MethodObject, ExamplePairingObject, ContentDescriptorObject, ReferenceObject } from "@open-rpc/meta-schema";
 
 interface IProps {
   method?: MethodObject;
@@ -14,6 +14,47 @@ interface IState {
   selectedIndex: number;
   currentExample?: ExamplePairingObject;
 }
+
+const newExample: ExamplePairingObject = {
+  name: "generated-example",
+  params: [
+  ],
+  result: {
+    name: "example-result",
+    value: null,
+  },
+};
+const getExamplesFromMethod = (method?: MethodObject): ExamplePairingObject[] => {
+  if (!method) { return []; }
+  const examples: ExamplePairingObject[] = [];
+
+  (method.params as ContentDescriptorObject[]).forEach((param, index: number) => {
+    if (param.schema.examples && param.schema.examples.length > 0) {
+      param.schema.examples.forEach((ex: any, i: number) => {
+        if (!examples[i]) {
+          examples.push({ ...newExample });
+        }
+        examples[i].params.push({
+          name: param.name,
+          value: ex,
+        });
+      });
+    }
+  });
+  const methodResult = method.result as ContentDescriptorObject;
+  if (methodResult && methodResult.schema && methodResult.schema.examples && methodResult.schema.examples.length > 0) {
+    methodResult.schema.examples.forEach((ex: any, i: number) => {
+      if (!examples[i]) {
+        examples.push({ ...newExample });
+      }
+      examples[i].result = {
+        name: methodResult.name,
+        value: ex,
+      };
+    });
+  }
+  return examples;
+};
 
 class ExamplePairings extends Component<IProps, IState> {
   constructor(props: IProps) {
@@ -43,8 +84,10 @@ class ExamplePairings extends Component<IProps, IState> {
     this.setState({ anchorEl: null });
   }
   public render() {
-    const { examples, method } = this.props;
+    let { examples } = this.props;
+    const { method } = this.props;
     const { anchorEl } = this.state;
+    examples = examples || getExamplesFromMethod(method);
     if (!examples || examples.length === 0) {
       return null;
     }
@@ -84,10 +127,10 @@ class ExamplePairings extends Component<IProps, IState> {
           </List>
         </Grid>
         <Grid item xs={12}>
-          {this.props.examples &&
+          {examples &&
             <ExamplePairing
-              method={method}
-              examplePosition={this.state.selectedIndex}
+              examplePairing={examples[this.state.selectedIndex]}
+              methodName={this.props.method && this.props.method.name}
               reactJsonOptions={this.props.reactJsonOptions} />}
         </Grid>
       </Grid>

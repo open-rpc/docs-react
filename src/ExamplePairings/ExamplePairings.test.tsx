@@ -32,10 +32,85 @@ it("renders examples", async () => {
     <ExamplePairings
       method={simpleMath.methods[0]}
       examples={simpleMath.methods[0].examples as ExamplePairingObject[]
-    } />
-  , div);
+      } />
+    , div);
   expect(div.innerHTML.includes("simpleMathAdditionTwo")).toBe(true);
   expect(div.innerHTML.includes("2")).toBe(true);
   expect(div.innerHTML.includes("4")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders examples with only schema examples", async () => {
+  const div = document.createElement("div");
+  const testDoc: OpenrpcDocument = {
+    info: {
+      title: "test",
+      version: "0.0.0",
+    },
+    methods: [
+      {
+        name: "test-method",
+        params: [{
+          name: "testparam1",
+          schema: {
+            examples: ["bob"],
+            type: "string",
+          },
+        }],
+        result: {
+          name: "test-method-result",
+          schema: {
+            examples: ["potato"],
+            type: "string",
+          },
+        },
+      },
+    ],
+    openrpc: "1.0.0",
+  };
+  ReactDOM.render(
+    <ExamplePairings
+      method={testDoc.methods[0]}
+      examples={testDoc.methods[0].examples as ExamplePairingObject[]
+      } />
+    , div);
+  expect(div.innerHTML.includes("potato")).toBe(true);
+  expect(div.innerHTML.includes("bob")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders examples with only schema examples and no method", async () => {
+  const div = document.createElement("div");
+  const testDoc: OpenrpcDocument = {
+    info: {
+      title: "test",
+      version: "0.0.0",
+    },
+    methods: [
+      {
+        name: "test-method",
+        params: [{
+          name: "testparam1",
+          schema: {
+            examples: ["bob"],
+            type: "string",
+          },
+        }],
+        result: {
+          name: "test-method-result",
+          schema: {
+            examples: ["potato"],
+            type: "string",
+          },
+        },
+      },
+    ],
+    openrpc: "1.0.0",
+  };
+  ReactDOM.render(
+    <ExamplePairings
+      examples={testDoc.methods[0].examples as ExamplePairingObject[]
+      } />
+    , div);
   ReactDOM.unmountComponentAtNode(div);
 });
