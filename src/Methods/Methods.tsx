@@ -69,7 +69,7 @@ class Methods extends Component<IProps> {
         {schema.methods.map((method, i) => (
           <ExpansionPanel
             key={i + method.name}
-            TransitionProps={{unmountOnExit: disableTransitionProps ? false : true}}
+            TransitionProps={{ unmountOnExit: disableTransitionProps ? false : true }}
             defaultExpanded={uiSchema && uiSchema.methods["ui:defaultExpanded"]}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -114,14 +114,10 @@ class Methods extends Component<IProps> {
                 <Errors errors={method.errors as ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
               </ExpansionPanelDetails>
             }
-            {method.examples && method.examples.length > 0 &&
-              <ExpansionPanelDetails key="examples">
-                <ExamplePairings
-                  examples={method.examples as ExamplePairingObject[]}
-                  method={method}
-                  reactJsonOptions={this.props.reactJsonOptions} />
-              </ExpansionPanelDetails>
-            }
+            <ExamplePairings
+              examples={method.examples as ExamplePairingObject[]}
+              method={method}
+              reactJsonOptions={this.props.reactJsonOptions} />
             {method.links && method.links.length > 0 &&
               <ExpansionPanelDetails key="links-title">
                 <Typography variant="h5">Links</Typography>
