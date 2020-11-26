@@ -6,6 +6,7 @@ import { MethodObject, ExamplePairingObject, ContentDescriptorObject, ReferenceO
 interface IProps {
   method?: MethodObject;
   examples?: ExamplePairingObject[];
+  uiSchema?: any;
   reactJsonOptions?: any;
 }
 
@@ -98,7 +99,7 @@ class ExamplePairings extends Component<IProps, IState> {
   }
   public render() {
     let { examples } = this.props;
-    const { method } = this.props;
+    const { method, uiSchema } = this.props;
     const { anchorEl } = this.state;
     examples = examples || getExamplesFromMethod(method);
     if (!examples || examples.length === 0) {
@@ -143,6 +144,7 @@ class ExamplePairings extends Component<IProps, IState> {
           <Grid item xs={12}>
             {examples &&
               <ExamplePairing
+                uiSchema={uiSchema}
                 paramStructure={this.props.method && this.props.method.paramStructure}
                 examplePairing={examples[this.state.selectedIndex]}
                 methodName={this.props.method && this.props.method.name}

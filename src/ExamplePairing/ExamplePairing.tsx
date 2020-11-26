@@ -5,6 +5,7 @@ import ReactJson from "react-json-view";
 import ReactMarkdown from "react-markdown";
 import { ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
+import MarkdownDescription from "../MarkdownDescription/MarkdownDescription";
 
 export type TParamStructure = "either" | "by-name" | "by-position";
 
@@ -12,6 +13,7 @@ interface IProps extends WithStyles<typeof styles> {
   examplePairing?: ExamplePairingObject;
   paramStructure?: TParamStructure;
   methodName?: string;
+  uiSchema?: any;
   reactJsonOptions?: any;
 }
 
@@ -23,7 +25,7 @@ const styles = (theme: Theme) => ({
 
 class ExamplePairing extends Component<IProps, {}> {
   public render() {
-    const { examplePairing, paramStructure, classes, methodName } = this.props;
+    const { examplePairing, paramStructure, classes, methodName, uiSchema } = this.props;
     if (_.isUndefined(examplePairing)) {
       return null;
     }
@@ -40,7 +42,11 @@ class ExamplePairing extends Component<IProps, {}> {
     return (
       <Grid container spacing={10}>
         <Grid item xs={12}>
-          <ReactMarkdown source={examplePairing.description} className={classes.description} />
+          <MarkdownDescription
+            uiSchema={uiSchema}
+            source={examplePairing.description}
+            className={classes.description}
+          />
         </Grid>
         <Grid item xs={6}>
           <Card>

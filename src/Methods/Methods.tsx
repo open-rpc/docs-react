@@ -6,7 +6,6 @@ import _ from "lodash";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ReactMarkdown from "react-markdown";
 import Params from "../Params/Params";
 import ContentDescriptor from "../ContentDescriptor/ContentDescriptor";
 import ExamplePairings from "../ExamplePairings/ExamplePairings";
@@ -21,6 +20,7 @@ import {
 } from "@open-rpc/meta-schema";
 import Links from "../Links/Links";
 import Tags from "../Tags/Tags";
+import MarkdownDescription from "../MarkdownDescription/MarkdownDescription";
 
 const styles = (theme: Theme) => ({
   description: {
@@ -84,7 +84,11 @@ class Methods extends Component<IProps> {
             }
             {method.description &&
               <ExpansionPanelDetails key="description">
-                <ReactMarkdown source={method.description} className={classes.description} />
+                <MarkdownDescription
+                  uiSchema={uiSchema}
+                  source={method.description}
+                  className={classes.description}
+                  />
               </ExpansionPanelDetails>
             }
             {method.params && method.params.length > 0 &&
@@ -115,6 +119,7 @@ class Methods extends Component<IProps> {
               </ExpansionPanelDetails>
             }
             <ExamplePairings
+              uiSchema={uiSchema}
               examples={method.examples as ExamplePairingObject[]}
               method={method}
               reactJsonOptions={this.props.reactJsonOptions} />
