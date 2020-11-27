@@ -274,3 +274,55 @@ it("renders schema methods tags", () => {
   expect(div.innerHTML.includes("Object")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it("renders schema methods examples", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        examples: [
+          {
+            name: "foo",
+          },
+        ],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true} />, div);
+  expect(div.innerHTML.includes("foo")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders schema methods examples with schema.examples fallback", () => {
+  const div = document.createElement("div");
+  const schema: OpenrpcDocument = {
+    info: {
+      title: "test",
+      version: "0.0.0",
+    },
+    methods: [
+      {
+        name: "test-method",
+        params: [{
+          name: "testparam1",
+          schema: {
+            examples: ["bob"],
+            type: "string",
+          },
+        }],
+        result: {
+          name: "test-method-result",
+          schema: {
+            examples: ["potato"],
+            type: "string",
+          },
+        },
+      },
+    ],
+    openrpc: "1.0.0",
+  };
+  ReactDOM.render(<Methods schema={schema as any} disableTransitionProps={true} />, div);
+  expect(div.innerHTML.includes("potato")).toBe(true);
+  expect(div.innerHTML.includes("bob")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
