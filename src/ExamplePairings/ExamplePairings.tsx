@@ -15,15 +15,6 @@ interface IState {
   currentExample?: ExamplePairingObject;
 }
 
-const newExample: ExamplePairingObject = {
-  name: "generated-example",
-  params: [
-  ],
-  result: {
-    name: "example-result",
-    value: null,
-  },
-};
 const getExamplesFromMethod = (method?: MethodObject): ExamplePairingObject[] => {
   if (!method) { return []; }
   if (!method.params) { return []; }
@@ -33,12 +24,25 @@ const getExamplesFromMethod = (method?: MethodObject): ExamplePairingObject[] =>
     if (param.schema && param.schema.examples && param.schema.examples.length > 0) {
       param.schema.examples.forEach((ex: any, i: number) => {
         if (!examples[i]) {
-          examples.push({ ...newExample });
+          examples.push({
+            name: "generated-example",
+            params: [
+              {
+                name: param.name,
+                value: ex,
+              },
+            ],
+            result: {
+              name: "example-result",
+              value: null,
+            },
+          });
+        } else {
+          examples[i].params.push({
+            name: param.name,
+            value: ex,
+          });
         }
-        examples[i].params.push({
-          name: param.name,
-          value: ex,
-        });
       });
     }
   });
@@ -46,12 +50,20 @@ const getExamplesFromMethod = (method?: MethodObject): ExamplePairingObject[] =>
   if (methodResult && methodResult.schema && methodResult.schema.examples && methodResult.schema.examples.length > 0) {
     methodResult.schema.examples.forEach((ex: any, i: number) => {
       if (!examples[i]) {
-        examples.push({ ...newExample });
+        examples.push({
+          name: "generated-example",
+          params: [],
+          result: {
+            name: methodResult.name,
+            value: ex,
+          },
+        });
+      } else {
+        examples[i].result = {
+          name: methodResult.name,
+          value: ex,
+        };
       }
-      examples[i].result = {
-        name: methodResult.name,
-        value: ex,
-      };
     });
   }
   return examples;
