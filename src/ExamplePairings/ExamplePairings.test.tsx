@@ -4,6 +4,11 @@ import ExamplePairings from "./ExamplePairings";
 import examples from "@open-rpc/examples";
 import refParser from "json-schema-ref-parser";
 import { OpenrpcDocument, ExamplePairingObject } from "@open-rpc/meta-schema";
+import {
+  cleanup,
+  fireEvent,
+  render,
+} from "@testing-library/react";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -146,4 +151,21 @@ it("renders examples with only schema examples and no method", async () => {
       } />
     , div);
   ReactDOM.unmountComponentAtNode(div);
+});
+
+it("renders examples and can switch between them", async () => {
+  const simpleMath = await refParser.dereference(examples.simpleMath) as OpenrpcDocument;
+  const { getByText } = render(
+    <ExamplePairings
+      method={simpleMath.methods[0]}
+      examples={simpleMath.methods[0].examples as ExamplePairingObject[]
+      } />,
+  );
+  const node = getByText("simpleMathAdditionTwo");
+  fireEvent.click(node);
+  const secondExampleMenuItem = getByText("simpleMathAdditionFour");
+  fireEvent.click(secondExampleMenuItem);
+  const example8 = getByText("8");
+  expect(example8).toBeDefined();
+  cleanup();
 });
