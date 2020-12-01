@@ -6,7 +6,7 @@ import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
 import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
 interface IProps {
-  schema: OpenrpcDocument;
+  schema?: OpenrpcDocument;
   uiSchema?: any;
   reactJsonOptions?: any;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
