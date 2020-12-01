@@ -7,3 +7,9 @@ it("renders without crashing", () => {
   ReactDOM.render(<Documentation schema={{} as any}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it("renders without crashing with no schema", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<Documentation />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
