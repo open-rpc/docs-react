@@ -234,6 +234,41 @@ it("renders examples with only schema examples and no method with number", async
     , div);
   ReactDOM.unmountComponentAtNode(div);
 });
+it("renders examples with only schema examples and no method with multiple number examples", async () => {
+  const div = document.createElement("div");
+  const testDoc: OpenrpcDocument = {
+    info: {
+      title: "test",
+      version: "0.0.0",
+    },
+    methods: [
+      {
+        name: "test-method",
+        params: [{
+          name: "testparam1",
+          schema: {
+            examples: [10101, 102],
+            type: "number",
+          },
+        }],
+        result: {
+          name: "test-method-result",
+          schema: {
+            examples: ["potato", "bar"],
+            type: "string",
+          },
+        },
+      },
+    ],
+    openrpc: "1.0.0",
+  };
+  ReactDOM.render(
+    <ExamplePairings
+      examples={testDoc.methods[0].examples as ExamplePairingObject[]
+      } />
+    , div);
+  ReactDOM.unmountComponentAtNode(div);
+});
 
 it("renders examples and can switch between them", async () => {
   const simpleMath = await refParser.dereference(examples.simpleMath) as OpenrpcDocument;
