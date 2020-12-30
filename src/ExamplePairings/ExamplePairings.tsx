@@ -143,6 +143,7 @@ class ExamplePairings extends Component<IProps, IState> {
           <Grid item xs={12}>
             {examples &&
               <ExamplePairing
+                paramStructure={this.props.method && this.props.method.paramStructure}
                 examplePairing={examples[this.state.selectedIndex]}
                 methodName={this.props.method && this.props.method.name}
                 reactJsonOptions={this.props.reactJsonOptions} />}

@@ -157,7 +157,6 @@ it("renders examples with multiple param schema examples and no method", async (
   ReactDOM.render(
     <ExamplePairings method={testDoc.methods[0]} />
     , div);
-  console.log("div", div.innerHTML); //tslint:disable-line
   expect(div.innerHTML.includes("bob")).toBe(true);
   expect(div.innerHTML.includes("bob2")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -285,4 +284,17 @@ it("renders examples and can switch between them", async () => {
   const example8 = getByText("8");
   expect(example8).toBeDefined();
   cleanup();
+});
+
+it("renders examples by-name", async () => {
+  const div = document.createElement("div");
+  const petstoreByName = await refParser.dereference(examples.petstoreByName) as OpenrpcDocument;
+  ReactDOM.render(
+    <ExamplePairings
+      method={petstoreByName.methods[0]}
+      examples={petstoreByName.methods[0].examples as ExamplePairingObject[]
+    } />, div);
+  expect(div.innerHTML).toContain("listPetExample");
+  expect(div.innerHTML).toContain("limit");
+  expect(div.innerHTML).toContain("1");
 });
