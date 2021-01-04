@@ -1,6 +1,6 @@
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark, materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { materialDark, materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ReactMarkdown from "react-markdown";
 import { Container } from "@material-ui/core";
 
