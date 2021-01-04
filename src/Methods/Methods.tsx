@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withStyles, Theme, WithStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
 import _ from "lodash";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ReactMarkdown from "react-markdown";
@@ -67,77 +67,77 @@ class Methods extends Component<IProps> {
       <div className={classes.root}>
         <Typography variant="h3" gutterBottom>Methods</Typography>
         {schema.methods.map((method, i) => (
-          <ExpansionPanel
+          <Accordion
             key={i + method.name}
             TransitionProps={{ unmountOnExit: disableTransitionProps ? false : true }}
             defaultExpanded={uiSchema && uiSchema.methods["ui:defaultExpanded"]}
           >
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography key={method.name} className={classes.heading}>{method.name}</Typography>
               <Typography key={method.summary} className={classes.secondaryHeading}>{method.summary}</Typography>
-            </ExpansionPanelSummary>
+            </AccordionSummary>
 
             {method.tags && method.tags.length > 0 &&
-              <ExpansionPanelDetails key="tags">
+              <AccordionDetails key="tags">
                 <Tags tags={method.tags as any} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.description &&
-              <ExpansionPanelDetails key="description">
+              <AccordionDetails key="description">
                 <ReactMarkdown source={method.description} className={classes.description} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.params && method.params.length > 0 &&
-              <ExpansionPanelDetails key="params-title">
+              <AccordionDetails key="params-title">
                 <Typography variant="h5">Params</Typography>
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.params &&
-              <ExpansionPanelDetails key="params">
+              <AccordionDetails key="params">
                 <Params params={method.params as ContentDescriptorObject[]} uiSchema={uiSchema} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.result &&
-              <ExpansionPanelDetails key="result-title">
+              <AccordionDetails key="result-title">
                 <Typography variant="h5">Result</Typography>
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.result && (method.result as ContentDescriptorObject).schema &&
-              <ExpansionPanelDetails key="result">
+              <AccordionDetails key="result">
                 <ContentDescriptor
                   contentDescriptor={method.result as ContentDescriptorObject}
                   hideRequired={true} uiSchema={uiSchema} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.errors && method.errors.length > 0 &&
-              <ExpansionPanelDetails key="errors">
+              <AccordionDetails key="errors">
                 <Errors errors={method.errors as ErrorObject[]} reactJsonOptions={this.props.reactJsonOptions} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             <ExamplePairings
               examples={method.examples as ExamplePairingObject[]}
               method={method}
               reactJsonOptions={this.props.reactJsonOptions} />
             {method.links && method.links.length > 0 &&
-              <ExpansionPanelDetails key="links-title">
+              <AccordionDetails key="links-title">
                 <Typography variant="h5">Links</Typography>
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {method.links && method.links.length > 0 &&
-              <ExpansionPanelDetails key="links">
+              <AccordionDetails key="links">
                 <Links links={method.links as LinkObject[]} reactJsonOptions={this.props.reactJsonOptions} />
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
             {this.props.methodPlugins && this.props.methodPlugins.length > 0 &&
-              <ExpansionPanelDetails key="method-plugins">
+              <AccordionDetails key="method-plugins">
                 {this.props.methodPlugins.map((CompDef: any) => {
                   return (
                     <CompDef openrpcMethodObject={method} />
                   );
                 })}
-              </ExpansionPanelDetails>
+              </AccordionDetails>
             }
-          </ExpansionPanel>
+          </Accordion>
         ))}
       </div>
     );
