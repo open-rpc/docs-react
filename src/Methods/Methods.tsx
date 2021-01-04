@@ -25,6 +25,7 @@ import MarkdownDescription from "../MarkdownDescription/MarkdownDescription";
 const styles = (theme: Theme) => ({
   description: {
     color: theme.palette.text.primary,
+    width: "100%",
   },
   heading: {
     flexBasis: "33.33%",

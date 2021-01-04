@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import { Card, CardContent, Theme, withStyles, WithStyles } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Theme, withStyles, WithStyles } from "@material-ui/core";
 import ReactJson from "react-json-view";
 import ReactMarkdown from "react-markdown";
 import { ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
@@ -48,8 +48,9 @@ class ExamplePairing extends Component<IProps, {}> {
             className={classes.description}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Card>
+            <CardHeader title="Request"></CardHeader>
             <CardContent>
               {examplePairing.params && <ReactJson src={{
                 id: 1,
@@ -60,7 +61,8 @@ class ExamplePairing extends Component<IProps, {}> {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
+          <CardHeader title="Result"></CardHeader>
           <Card>
             <CardContent>
               {examplePairing.result && <ReactJson src={{
