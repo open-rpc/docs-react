@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 import JSONSchemaTree from "@xops.net/json-schema-to-react-tree";
 import { ContentDescriptorObject } from "@open-rpc/meta-schema";
 import "./ContentDescriptor.css";
+import MarkdownDescription from "../MarkdownDescription/MarkdownDescription";
 
 const styles = (theme: Theme) => ({
   description: {
@@ -60,7 +61,11 @@ class ContentDescriptor extends Component<IProps> {
         <ExpansionPanelDetails style={{ display: "block", overflowX: "auto" }}>
           <>
             {contentDescriptor.description &&
-              <ReactMarkdown source={contentDescriptor.description} className={classes.description} />
+              <MarkdownDescription
+                uiSchema={uiSchema}
+                source={contentDescriptor.description}
+                className={classes.description}
+                />
             }
             {contentDescriptor.schema &&
               <>

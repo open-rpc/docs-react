@@ -7,7 +7,8 @@ module.exports = {
   "testEnvironment": "jsdom",
   "testPathIgnorePatterns": ["./build"],
   "preset": "ts-jest",
+  "transformIgnorePatterns": ['^.+\\.js$'],
   "moduleNameMapper": {
-    "\\.(css|less|sass|scss)$": "jest-transform-css"
-  }
-}
+    "\\.(css|less|sass|scss)$": "jest-transform-css",
+  },
+};

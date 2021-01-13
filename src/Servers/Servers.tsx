@@ -8,6 +8,7 @@ import { Typography, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPane
 import { ServerObject } from "@open-rpc/meta-schema";
 import ReactJson from "react-json-view";
 import ExpansionTable from "../ExpansionTable/ExpansionTable";
+import MarkdownDescription from "../MarkdownDescription/MarkdownDescription";
 
 const styles = (theme: Theme) => ({
   description: {
@@ -60,7 +61,11 @@ class Servers extends Component<IProps> {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={{ display: "block" }} key="servers-body">
                       {server.description &&
-                        <ReactMarkdown source={server.description} className={classes.description} />
+                        <MarkdownDescription
+                          uiSchema={uiSchema}
+                          source={server.description}
+                          className={classes.description}
+                        />
                       }
                       {server.variables &&
                         <Typography variant="h6" gutterBottom className={classes.paramsMargin}>Variables</Typography>}
