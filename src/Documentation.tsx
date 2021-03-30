@@ -21,6 +21,7 @@ export default class Documentation extends React.Component<IProps> {
     if (!schema) {
       return null;
     }
+    const shouldShowContentDescriptors = !(uiSchema && uiSchema.contentDescriptors && uiSchema.contentDescriptors["ui:hidden"] === true);
     return (
       <>
         <Info schema={schema} />
@@ -31,7 +32,9 @@ export default class Documentation extends React.Component<IProps> {
           reactJsonOptions={reactJsonOptions}
           methodPlugins={this.props.methodPlugins}
         />
-        <ContentDescriptors schema={schema} uiSchema={uiSchema}></ContentDescriptors>
+        {shouldShowContentDescriptors &&
+          <ContentDescriptors schema={schema} uiSchema={uiSchema}></ContentDescriptors>
+        }
       </>
     );
   }
