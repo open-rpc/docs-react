@@ -60,6 +60,38 @@ it("doesnt render collapsed contents", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+it("doesnt render collapsed contents with empty uiSchema", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any} uiSchema={{}}/>, div);
+  expect(div.innerHTML.includes("foobarz")).toBe(false);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("doesnt render collapsed contents with empty uiSchema.methods", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods schema={schema as any} uiSchema={{methods: {}}}/>, div);
+  expect(div.innerHTML.includes("foobarz")).toBe(false);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
 it("renders collapsed contents with defaultExpanded from uiSchema", () => {
   const div = document.createElement("div");
   const schema = {
