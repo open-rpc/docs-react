@@ -85,6 +85,62 @@ it("renders collapsed contents with defaultExpanded from uiSchema", () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+it("renders collapsed contents with defaultExpanded with the method from uiSchema", () => {
+  const div = document.createElement("div");
+  const schema = {
+    methods: [
+      {
+        name: "foomethod",
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  const uiSchema = {
+    links: {
+    },
+    methods: {
+      "ui:defaultExpanded": {
+        foomethod: true,
+      },
+    },
+    params: {
+    },
+  };
+  ReactDOM.render(<Methods uiSchema={uiSchema} schema={schema as any} disableTransitionProps={true} />, div);
+  expect(div.innerHTML.includes("aria-expanded=\"true\"")).toBe(true);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it("doesnt render collapsed contents with wrong method name and defaultExpanded with method", () => {
+  const div = document.createElement("div");
+  const uiSchema = {
+    links: {
+    },
+    methods: {
+      "ui:defaultExpanded": {
+        foomethod: true,
+      },
+    },
+    params: {
+    },
+  };
+  const schema = {
+    methods: [
+      {
+        name: "foomethod2",
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  ReactDOM.render(<Methods uiSchema={uiSchema} schema={schema as any} />, div);
+  expect(div.innerHTML.includes("foobarz")).toBe(false);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
 it("renders collapsed contents with disableTransitionProps", () => {
   const div = document.createElement("div");
   const schema = {
