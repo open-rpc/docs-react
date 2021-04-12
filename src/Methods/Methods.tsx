@@ -69,6 +69,7 @@ class Methods extends Component<IProps> {
         <Typography variant="h3" gutterBottom>Methods</Typography>
         {schema.methods.map((method, i) => (
           <ExpansionPanel
+            id={method.name}
             key={i + method.name}
             TransitionProps={{ unmountOnExit: disableTransitionProps ? false : true }}
             defaultExpanded={uiSchema && (uiSchema.methods["ui:defaultExpanded"] === true || uiSchema.methods["ui:defaultExpanded"][method.name] === true)}
@@ -89,7 +90,7 @@ class Methods extends Component<IProps> {
                   uiSchema={uiSchema}
                   source={method.description}
                   className={classes.description}
-                  />
+                />
               </ExpansionPanelDetails>
             }
             {method.params && method.params.length > 0 &&
