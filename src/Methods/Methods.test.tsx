@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Methods, { IMethodPluginProps } from "./Methods";
 import { OpenrpcDocument } from "@open-rpc/meta-schema";
+import {
+  cleanup,
+  fireEvent,
+  render,
+} from "@testing-library/react";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -71,7 +76,7 @@ it("doesnt render collapsed contents with empty uiSchema", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any} uiSchema={{}}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} uiSchema={{}} />, div);
   expect(div.innerHTML.includes("foobarz")).toBe(false);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -87,7 +92,7 @@ it("doesnt render collapsed contents with empty uiSchema.methods", () => {
       },
     ],
   };
-  ReactDOM.render(<Methods schema={schema as any} uiSchema={{methods: {}}}/>, div);
+  ReactDOM.render(<Methods schema={schema as any} uiSchema={{ methods: {} }} />, div);
   expect(div.innerHTML.includes("foobarz")).toBe(false);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -208,7 +213,7 @@ it("renders schema plugin", () => {
 
   ReactDOM.render(
     <Methods schema={schema as any} methodPlugins={[TestComponent]} disableTransitionProps={true} />
-  , div);
+    , div);
   expect(div.innerHTML.includes("get_pet")).toBe(true);
   expect(div.innerHTML.includes("Plugin Test")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
@@ -413,4 +418,30 @@ it("renders schema methods examples with schema.examples fallback", () => {
   expect(div.innerHTML.includes("potato")).toBe(true);
   expect(div.innerHTML.includes("bob")).toBe(true);
   ReactDOM.unmountComponentAtNode(div);
+});
+
+it("can call onMethodToggle when a method is clicked", (done) => {
+  const schema = {
+    methods: [
+      {
+        name: "foo",
+        params: [{
+          name: "foobarz",
+        }],
+      },
+    ],
+  };
+  const { getByText } = render(
+    <Methods
+      schema={schema as any}
+      onMethodToggle={(method: string, expanded: boolean) => {
+        expect(method).toEqual("foo");
+        expect(expanded).toEqual(true);
+        cleanup();
+        done();
+      }}
+    />,
+  );
+  const node = getByText(schema.methods[0].name);
+  fireEvent.click(node);
 });
