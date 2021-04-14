@@ -46,6 +46,7 @@ const styles = (theme: Theme) => ({
 export interface IMethodPluginProps {
   openrpcMethodObject: MethodObject;
 }
+export type OnMethodExpandChange = (method: string, expanded: boolean) => void;
 
 interface IProps extends WithStyles<typeof styles> {
   schema?: OpenrpcDocument;
@@ -53,11 +54,12 @@ interface IProps extends WithStyles<typeof styles> {
   reactJsonOptions?: object;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
   disableTransitionProps?: boolean;
+  onMethodExpandChange?: OnMethodExpandChange;
 }
 
 class Methods extends Component<IProps> {
   public render() {
-    const { schema, classes, uiSchema, disableTransitionProps } = this.props;
+    const { schema, classes, uiSchema, disableTransitionProps, onMethodExpandChange } = this.props;
     if (!schema) {
       return null;
     }
@@ -72,6 +74,11 @@ class Methods extends Component<IProps> {
             id={method.name}
             key={i + method.name}
             TransitionProps={{ unmountOnExit: disableTransitionProps ? false : true }}
+            onChange={(__, expanded: boolean) => {
+              if (onMethodExpandChange) {
+                onMethodExpandChange(method.name, expanded);
+              }
+            }}
             defaultExpanded={
               uiSchema &&
               uiSchema.methods &&

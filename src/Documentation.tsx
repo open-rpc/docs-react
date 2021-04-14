@@ -1,7 +1,7 @@
 import React from "react";
 import Info from "./Info/Info";
 import Servers from "./Servers/Servers";
-import Methods, { IMethodPluginProps } from "./Methods/Methods";
+import Methods, { IMethodPluginProps, OnMethodExpandChange } from "./Methods/Methods";
 import ContentDescriptors from "./ContentDescriptors/ContentDescriptors";
 import { OpenrpcDocument } from "@open-rpc/meta-schema";
 
@@ -10,6 +10,7 @@ interface IProps {
   uiSchema?: any;
   reactJsonOptions?: any;
   methodPlugins?: Array<React.FC<IMethodPluginProps>>;
+  onMethodExpandChange?: OnMethodExpandChange;
 }
 
 export default class Documentation extends React.Component<IProps> {
@@ -17,7 +18,7 @@ export default class Documentation extends React.Component<IProps> {
     super(props);
   }
   public render() {
-    const { schema, uiSchema, reactJsonOptions } = this.props;
+    const { schema, uiSchema, reactJsonOptions, onMethodExpandChange } = this.props;
     if (!schema) {
       return null;
     }
@@ -27,6 +28,7 @@ export default class Documentation extends React.Component<IProps> {
         <Info schema={schema} />
         <Servers servers={schema.servers} reactJsonOptions={reactJsonOptions} />
         <Methods
+          onMethodExpandChange={onMethodExpandChange}
           schema={schema}
           uiSchema={uiSchema}
           reactJsonOptions={reactJsonOptions}
